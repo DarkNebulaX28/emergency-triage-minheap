@@ -1,0 +1,29 @@
+# Build directories
+build/
+bin/
+out/
+.cache/
+
+# IDE / Editor configuration
+.vscode/
+.vs/
+*.sln
+*.vcxproj*
+*.user
+.idea/
+cmake-build-*/
+
+# Compiled binaries and libraries
+*.exe
+*.o
+*.obj
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# Temporary & OS files
+.DS_Store
+Thumbs.db
+*.log
