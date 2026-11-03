@@ -949,6 +949,14 @@ void dibujarInterfaz()
 
     dibujarBarraDistribucionPrioridades(dt);
 
+    if (!temaClaro){
+        ImGui::GetStyle().Colors[ImGuiCol_Text] =
+            ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+    
+        ImGui::GetStyle().Colors[ImGuiCol_TextDisabled] =
+            ImVec4(0.80f, 0.82f, 0.85f, 1.0f);
+    }
+
     ImGuiWindowFlags childNoScroll = ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
 
     float anchoDisponible = ImGui::GetContentRegionAvail().x;
