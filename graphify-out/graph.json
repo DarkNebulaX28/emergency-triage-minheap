@@ -1,0 +1,4111 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "schema_version": 1,
+    "graphify_version": "0.9.83"
+  },
+  "nodes": [
+    {
+      "id": "src_colaprioridad_cola",
+      "label": "Cola",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L5"
+    },
+    {
+      "id": "src_paciente_paciente",
+      "label": "Paciente",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Dominio de Paciente y Triaje",
+      "file_type": "code",
+      "norm_label": "paciente",
+      "source_file": "src/Paciente.h",
+      "source_location": "L11"
+    },
+    {
+      "id": "src_colaprioridad_nodo",
+      "label": "Nodo",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "nodo",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_colaprioridad_cola_actualizarprioridad",
+      "label": ".actualizarPrioridad()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".actualizarprioridad()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L43"
+    },
+    {
+      "id": "src_colaprioridad_cola_cola",
+      "label": ".Cola()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".cola()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L24"
+    },
+    {
+      "id": "src_colaprioridad_cola_consultarfrente",
+      "label": ".consultarFrente()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".consultarfrente()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L32"
+    },
+    {
+      "id": "src_colaprioridad_cola_consultarfrenteconprioridad",
+      "label": ".consultarFrenteConPrioridad()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".consultarfrenteconprioridad()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L33"
+    },
+    {
+      "id": "src_colaprioridad_cola_contarporprioridad",
+      "label": ".contarPorPrioridad()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".contarporprioridad()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L44"
+    },
+    {
+      "id": "src_colaprioridad_cola_eliminarenposicion",
+      "label": ".eliminarEnPosicion()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".eliminarenposicion()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L42"
+    },
+    {
+      "id": "src_colaprioridad_cola_encolar",
+      "label": ".encolar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".encolar()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L29"
+    },
+    {
+      "id": "src_colaprioridad_cola_limpiar",
+      "label": ".limpiar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".limpiar()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L35"
+    },
+    {
+      "id": "src_colaprioridad_cola_mostrar_tamanio",
+      "label": ".mostrar_tamanio()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".mostrar_tamanio()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L28"
+    },
+    {
+      "id": "src_colaprioridad_cola_mostrarestado",
+      "label": ".mostrarEstado()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".mostrarestado()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L34"
+    },
+    {
+      "id": "src_colaprioridad_cola_obtenerdireccionnodo",
+      "label": ".obtenerDireccionNodo()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".obtenerdireccionnodo()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L46"
+    },
+    {
+      "id": "src_colaprioridad_cola_obtenerdireccionsiguiente",
+      "label": ".obtenerDireccionSiguiente()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".obtenerdireccionsiguiente()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L47"
+    },
+    {
+      "id": "src_colaprioridad_cola_obtenerelemento",
+      "label": ".obtenerElemento()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".obtenerelemento()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L39"
+    },
+    {
+      "id": "src_colaprioridad_cola_obtenerposicioninsercion",
+      "label": ".obtenerPosicionInsercion()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".obtenerposicioninsercion()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L40"
+    },
+    {
+      "id": "src_colaprioridad_cola_obtenertotaloperaciones",
+      "label": ".obtenerTotalOperaciones()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".obtenertotaloperaciones()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L48"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_actualizarprioridad",
+      "label": "Cola<T>::actualizarPrioridad()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::actualizarprioridad()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L219"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_cola",
+      "label": "Cola<T>::Cola()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::cola()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L10"
+    },
+    {
+      "id": "src_interfaz_agregarpaciente",
+      "label": "agregarPaciente()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "agregarpaciente()",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L159"
+    },
+    {
+      "id": "src_interfaz_atenderpaciente",
+      "label": "atenderPaciente()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "atenderpaciente()",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L210"
+    },
+    {
+      "id": "src_interfaz_cargarfuentessistema",
+      "label": "cargarFuentesSistema()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "cargarfuentessistema()",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L982"
+    },
+    {
+      "id": "src_interfaz_cargarpacientesdemo",
+      "label": "cargarPacientesDemo()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "cargarpacientesdemo()",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L238"
+    },
+    {
+      "id": "src_interfaz_configurarestilo",
+      "label": "configurarEstilo()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "metadata": {
+        "unresolved_calls": [
+          {
+            "callee": "GetStyle",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L118"
+          }
+        ]
+      },
+      "norm_label": "configurarestilo()",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L116"
+    },
+    {
+      "id": "src_interfaz_dibujarinterfaz",
+      "label": "dibujarInterfaz()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "metadata": {
+        "unresolved_calls": [
+          {
+            "callee": "GetMainViewport",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L531"
+          },
+          {
+            "callee": "SetNextWindowPos",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L533"
+          },
+          {
+            "callee": "SetNextWindowSize",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L534"
+          },
+          {
+            "callee": "Begin",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L543"
+          },
+          {
+            "callee": "PushFont",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L554"
+          },
+          {
+            "callee": "TextColored",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L556"
+          },
+          {
+            "callee": "PopFont",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L562"
+          },
+          {
+            "callee": "SameLine",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L564"
+          },
+          {
+            "callee": "TextDisabled",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L565"
+          },
+          {
+            "callee": "GetWindowWidth",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L569"
+          },
+          {
+            "callee": "Button",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L574"
+          },
+          {
+            "callee": "Spacing",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L587"
+          },
+          {
+            "callee": "Separator",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L601"
+          },
+          {
+            "callee": "GetContentRegionAvail",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L604"
+          },
+          {
+            "callee": "BeginChild",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L614"
+          },
+          {
+            "callee": "Text",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L624"
+          },
+          {
+            "callee": "SetNextItemWidth",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L625"
+          },
+          {
+            "callee": "InputText",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L626"
+          },
+          {
+            "callee": "InputInt",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L635"
+          },
+          {
+            "callee": "InputTextMultiline",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L644"
+          },
+          {
+            "callee": "Combo",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L663"
+          },
+          {
+            "callee": "PushStyleColor",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L677"
+          },
+          {
+            "callee": "PopStyleColor",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L684"
+          },
+          {
+            "callee": "EndChild",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L726"
+          },
+          {
+            "callee": "RadioButton",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L762"
+          },
+          {
+            "callee": "BeginGroup",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L849"
+          },
+          {
+            "callee": "Dummy",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L850"
+          },
+          {
+            "callee": "EndGroup",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L859"
+          },
+          {
+            "callee": "BeginTable",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L878"
+          },
+          {
+            "callee": "TableSetupScrollFreeze",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L880"
+          },
+          {
+            "callee": "TableSetupColumn",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L881"
+          },
+          {
+            "callee": "TableHeadersRow",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L890"
+          },
+          {
+            "callee": "TableNextRow",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L900"
+          },
+          {
+            "callee": "PushID",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L901"
+          },
+          {
+            "callee": "TableSetColumnIndex",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L903"
+          },
+          {
+            "callee": "TextWrapped",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L933"
+          },
+          {
+            "callee": "SmallButton",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L938"
+          },
+          {
+            "callee": "PopID",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L945"
+          },
+          {
+            "callee": "EndTable",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L948"
+          },
+          {
+            "callee": "End",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L976"
+          }
+        ]
+      },
+      "norm_label": "dibujarinterfaz()",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L529"
+    },
+    {
+      "id": "src_interfaz_dibujartarjeta",
+      "label": "dibujarTarjeta()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "metadata": {
+        "unresolved_calls": [
+          {
+            "callee": "PushID",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L268"
+          },
+          {
+            "callee": "PushStyleColor",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L270"
+          },
+          {
+            "callee": "PushStyleVar",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L273"
+          },
+          {
+            "callee": "BeginChild",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L276"
+          },
+          {
+            "callee": "TextColored",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L285"
+          },
+          {
+            "callee": "TextDisabled",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L297"
+          },
+          {
+            "callee": "PushFont",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L301"
+          },
+          {
+            "callee": "PopFont",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L310"
+          },
+          {
+            "callee": "Separator",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L312"
+          },
+          {
+            "callee": "Text",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L314"
+          },
+          {
+            "callee": "TextWrapped",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L321"
+          },
+          {
+            "callee": "Spacing",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L331"
+          },
+          {
+            "callee": "SmallButton",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L337"
+          },
+          {
+            "callee": "SameLine",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L341"
+          },
+          {
+            "callee": "EndChild",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L349"
+          },
+          {
+            "callee": "PopStyleVar",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L351"
+          },
+          {
+            "callee": "PopStyleColor",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L352"
+          },
+          {
+            "callee": "PopID",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L354"
+          }
+        ]
+      },
+      "norm_label": "dibujartarjeta()",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L254"
+    },
+    {
+      "id": "src_interfaz_dibujartitulo",
+      "label": "dibujarTitulo()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "metadata": {
+        "unresolved_calls": [
+          {
+            "callee": "PushFont",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L105"
+          },
+          {
+            "callee": "Text",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L107"
+          },
+          {
+            "callee": "PopFont",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L110"
+          }
+        ]
+      },
+      "norm_label": "dibujartitulo()",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L102"
+    },
+    {
+      "id": "src_interfaz_dibujarvistaprevia",
+      "label": "dibujarVistaPrevia()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "metadata": {
+        "unresolved_calls": [
+          {
+            "callee": "GetContentRegionAvail",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L362"
+          },
+          {
+            "callee": "BeginChild",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L368"
+          },
+          {
+            "callee": "Spacing",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L371"
+          },
+          {
+            "callee": "PushStyleColor",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L385"
+          },
+          {
+            "callee": "PushStyleVar",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L387"
+          },
+          {
+            "callee": "PushFont",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L397"
+          },
+          {
+            "callee": "TextColored",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L399"
+          },
+          {
+            "callee": "PopFont",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L406"
+          },
+          {
+            "callee": "TextDisabled",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L408"
+          },
+          {
+            "callee": "Separator",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L409"
+          },
+          {
+            "callee": "TextWrapped",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L411"
+          },
+          {
+            "callee": "Text",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L416"
+          },
+          {
+            "callee": "EndChild",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L450"
+          },
+          {
+            "callee": "PopStyleVar",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L452"
+          },
+          {
+            "callee": "PopStyleColor",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L453"
+          },
+          {
+            "callee": "SameLine",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L457"
+          }
+        ]
+      },
+      "norm_label": "dibujarvistaprevia()",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L360"
+    },
+    {
+      "id": "src_interfaz_ejecutarinterfaz",
+      "label": "ejecutarInterfaz()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "metadata": {
+        "unresolved_calls": [
+          {
+            "callee": "CreateContext",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L1103"
+          },
+          {
+            "callee": "GetIO",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L1104"
+          },
+          {
+            "callee": "NewFrame",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L1129"
+          },
+          {
+            "callee": "Render",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L1133"
+          },
+          {
+            "callee": "GetDrawData",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L1137"
+          },
+          {
+            "callee": "DestroyContext",
+            "receiver_type": "ImGui",
+            "lang": "cpp",
+            "line": "L1143"
+          }
+        ]
+      },
+      "norm_label": "ejecutarinterfaz()",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L1063"
+    },
+    {
+      "id": "src_interfaz_obtenercolor",
+      "label": "obtenerColor()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "obtenercolor()",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L60"
+    },
+    {
+      "id": "src_interfaz_obtenernombreprioridad",
+      "label": "obtenerNombrePrioridad()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "obtenernombreprioridad()",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L73"
+    },
+    {
+      "id": "src_interfaz_obtenertiempoobjetivo",
+      "label": "obtenerTiempoObjetivo()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "obtenertiempoobjetivo()",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L86"
+    },
+    {
+      "id": "src_colaprioridad_cola_desencolar",
+      "label": ".desencolar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".desencolar()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L30"
+    },
+    {
+      "id": "src_colaprioridad_cola_desencolarconprioridad",
+      "label": ".desencolarConPrioridad()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".desencolarconprioridad()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L31"
+    },
+    {
+      "id": "src_colaprioridad_cola_mayorprioridad",
+      "label": ".mayorPrioridad()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".mayorprioridad()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L37"
+    },
+    {
+      "id": "src_colaprioridad_cola_verificar_vacio",
+      "label": ".verificar_vacio()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".verificar_vacio()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L27"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_consultarfrente",
+      "label": "Cola<T>::consultarFrente()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::consultarfrente()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L94"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_consultarfrenteconprioridad",
+      "label": "Cola<T>::consultarFrenteConPrioridad()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::consultarfrenteconprioridad()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L104"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_contarporprioridad",
+      "label": "Cola<T>::contarPorPrioridad()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::contarporprioridad()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L234"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_desencolar",
+      "label": "Cola<T>::desencolar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::desencolar()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L66"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_desencolarconprioridad",
+      "label": "Cola<T>::desencolarConPrioridad()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::desencolarconprioridad()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L72"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_eliminarenposicion",
+      "label": "Cola<T>::eliminarEnPosicion()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::eliminarenposicion()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L186"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_encolar",
+      "label": "Cola<T>::encolar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::encolar()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L38"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_limpiar",
+      "label": "Cola<T>::limpiar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::limpiar()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L134"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_mayorprioridad",
+      "label": "Cola<T>::mayorPrioridad()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::mayorprioridad()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L33"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_mostrar_tamanio",
+      "label": "Cola<T>::mostrar_tamanio()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::mostrar_tamanio()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L28"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_mostrarestado",
+      "label": "Cola<T>::mostrarEstado()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::mostrarestado()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L115"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_obtenerdireccionnodo",
+      "label": "Cola<T>::obtenerDireccionNodo()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::obtenerdireccionnodo()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L247"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_obtenerdireccionsiguiente",
+      "label": "Cola<T>::obtenerDireccionSiguiente()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::obtenerdireccionsiguiente()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L259"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_obtenerelemento",
+      "label": "Cola<T>::obtenerElemento()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::obtenerelemento()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L149"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_obtenerposicioninsercion",
+      "label": "Cola<T>::obtenerPosicionInsercion()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::obtenerposicioninsercion()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L173"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_obtenertotaloperaciones",
+      "label": "Cola<T>::obtenerTotalOperaciones()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::obtenertotaloperaciones()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L274"
+    },
+    {
+      "id": "src_operaciones_colapriori_cola_t_verificar_vacio",
+      "label": "Cola<T>::verificar_vacio()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cola<t>::verificar_vacio()",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L23"
+    },
+    {
+      "id": "src_paciente_paciente_obtenerhoraactual",
+      "label": ".obtenerHoraActual()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Dominio de Paciente y Triaje",
+      "file_type": "code",
+      "norm_label": ".obtenerhoraactual()",
+      "source_file": "src/Paciente.h",
+      "source_location": "L23"
+    },
+    {
+      "id": "src_paciente_paciente_paciente",
+      "label": ".Paciente()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Dominio de Paciente y Triaje",
+      "file_type": "code",
+      "norm_label": ".paciente()",
+      "source_file": "src/Paciente.h",
+      "source_location": "L37"
+    },
+    {
+      "id": "src_paciente_paciente_siguienteid",
+      "label": ".siguienteId()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Dominio de Paciente y Triaje",
+      "file_type": "code",
+      "norm_label": ".siguienteid()",
+      "source_file": "src/Paciente.h",
+      "source_location": "L18"
+    },
+    {
+      "id": "src_validacion_nombrecontienesololetras",
+      "label": "nombreContieneSoloLetras()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Validacion Clinica de Datos",
+      "file_type": "code",
+      "norm_label": "nombrecontienesololetras()",
+      "source_file": "src/validacion.h",
+      "source_location": "L21"
+    },
+    {
+      "id": "src_validacion_textovacio",
+      "label": "textoVacio()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Validacion Clinica de Datos",
+      "file_type": "code",
+      "norm_label": "textovacio()",
+      "source_file": "src/validacion.h",
+      "source_location": "L8"
+    },
+    {
+      "id": "src_validacion_validaredad",
+      "label": "validarEdad()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Validacion Clinica de Datos",
+      "file_type": "code",
+      "norm_label": "validaredad()",
+      "source_file": "src/validacion.h",
+      "source_location": "L59"
+    },
+    {
+      "id": "src_validacion_validarnombre",
+      "label": "validarNombre()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Validacion Clinica de Datos",
+      "file_type": "code",
+      "norm_label": "validarnombre()",
+      "source_file": "src/validacion.h",
+      "source_location": "L44"
+    },
+    {
+      "id": "src_validacion_validarpaciente",
+      "label": "validarPaciente()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Validacion Clinica de Datos",
+      "file_type": "code",
+      "norm_label": "validarpaciente()",
+      "source_file": "src/validacion.h",
+      "source_location": "L83"
+    },
+    {
+      "id": "src_validacion_validarprioridad",
+      "label": "validarPrioridad()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Validacion Clinica de Datos",
+      "file_type": "code",
+      "norm_label": "validarprioridad()",
+      "source_file": "src/validacion.h",
+      "source_location": "L77"
+    },
+    {
+      "id": "src_validacion_validarsintomas",
+      "label": "validarSintomas()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Validacion Clinica de Datos",
+      "file_type": "code",
+      "norm_label": "validarsintomas()",
+      "source_file": "src/validacion.h",
+      "source_location": "L65"
+    },
+    {
+      "id": "src_main_ejecutarpruebasunitarias",
+      "label": "ejecutarPruebasUnitarias()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "ejecutarpruebasunitarias()",
+      "source_file": "src/main.cpp",
+      "source_location": "L10"
+    },
+    {
+      "id": "src_main_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "src/main.cpp",
+      "source_location": "L66"
+    },
+    {
+      "id": "src_main_mostrarayuda",
+      "label": "mostrarAyuda()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "mostrarayuda()",
+      "source_file": "src/main.cpp",
+      "source_location": "L57"
+    },
+    {
+      "id": "src_interfaz_wndprocwin32",
+      "label": "WndProcWin32()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "wndprocwin32()",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L1038"
+    },
+    {
+      "id": "src_colaprioridad_nodo_nodo",
+      "label": ".Nodo()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": ".nodo()",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L12"
+    },
+    {
+      "id": "src_colaprioridad_cola_cantidad",
+      "label": "cantidad",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "cantidad",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L18"
+    },
+    {
+      "id": "src_colaprioridad_cola_fin",
+      "label": "fin",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "fin",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L17"
+    },
+    {
+      "id": "src_colaprioridad_cola_frente",
+      "label": "frente",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "frente",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L16"
+    },
+    {
+      "id": "src_colaprioridad_cola_totaloperaciones",
+      "label": "totalOperaciones",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "totaloperaciones",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L19"
+    },
+    {
+      "id": "imguiio",
+      "label": "ImGuiIO",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "imguiio",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "imvec4",
+      "label": "ImVec4",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "imvec4",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_interfaz_cpp_src_interfaz",
+      "label": "interfaz.cpp",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "interfaz.cpp",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_interfaz_cpp_string",
+      "label": "string",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "string",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_operaciones_colapriori",
+      "label": "operaciones_colaPriori.h",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "operaciones_colapriori.h",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_operaciones_colapriori_h_t",
+      "label": "T",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "t",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_paciente",
+      "label": "Paciente.h",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Dominio de Paciente y Triaje",
+      "file_type": "code",
+      "norm_label": "paciente.h",
+      "source_file": "src/Paciente.h",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_paciente_h_string",
+      "label": "string",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Dominio de Paciente y Triaje",
+      "file_type": "code",
+      "norm_label": "string",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_paciente_paciente_edad",
+      "label": "edad",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Dominio de Paciente y Triaje",
+      "file_type": "code",
+      "norm_label": "edad",
+      "source_file": "src/Paciente.h",
+      "source_location": "L14"
+    },
+    {
+      "id": "src_paciente_paciente_horaingreso",
+      "label": "horaIngreso",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Dominio de Paciente y Triaje",
+      "file_type": "code",
+      "norm_label": "horaingreso",
+      "source_file": "src/Paciente.h",
+      "source_location": "L16"
+    },
+    {
+      "id": "src_paciente_paciente_id",
+      "label": "id",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Dominio de Paciente y Triaje",
+      "file_type": "code",
+      "norm_label": "id",
+      "source_file": "src/Paciente.h",
+      "source_location": "L12"
+    },
+    {
+      "id": "src_paciente_paciente_nombre",
+      "label": "nombre",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Dominio de Paciente y Triaje",
+      "file_type": "code",
+      "norm_label": "nombre",
+      "source_file": "src/Paciente.h",
+      "source_location": "L13"
+    },
+    {
+      "id": "src_paciente_paciente_sintomas",
+      "label": "sintomas",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Dominio de Paciente y Triaje",
+      "file_type": "code",
+      "norm_label": "sintomas",
+      "source_file": "src/Paciente.h",
+      "source_location": "L15"
+    },
+    {
+      "id": "src_validacion",
+      "label": "validacion.h",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Validacion Clinica de Datos",
+      "file_type": "code",
+      "norm_label": "validacion.h",
+      "source_file": "src/validacion.h",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_validacion_h_string",
+      "label": "string",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Validacion Clinica de Datos",
+      "file_type": "code",
+      "norm_label": "string",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_colaprioridad",
+      "label": "colaPrioridad.h",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "colaprioridad.h",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_interfaz_h_src_interfaz",
+      "label": "interfaz.h",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "interfaz.h",
+      "source_file": "src/interfaz.h",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_main",
+      "label": "main.cpp",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "main.cpp",
+      "source_file": "src/main.cpp",
+      "source_location": "L1"
+    },
+    {
+      "id": "hwnd",
+      "label": "HWND",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "hwnd",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "lparam",
+      "label": "LPARAM",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "lparam",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "lresult",
+      "label": "LRESULT",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "lresult",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "uint",
+      "label": "UINT",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "uint",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "wparam",
+      "label": "WPARAM",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "code",
+      "norm_label": "wparam",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_colaprioridad_h_t",
+      "label": "T",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "t",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_colaprioridad_nodo_dato",
+      "label": "dato",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "dato",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L8"
+    },
+    {
+      "id": "src_colaprioridad_nodo_prioridad",
+      "label": "prioridad",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "prioridad",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L10"
+    },
+    {
+      "id": "src_colaprioridad_nodo_sig",
+      "label": "sig",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "code",
+      "norm_label": "sig",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L9"
+    },
+    {
+      "id": "doc_adr001",
+      "label": "ADR-001 (Cola de Prioridad Nodos Dinamicos)",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "document",
+      "norm_label": "adr-001 (cola de prioridad nodos dinamicos)",
+      "source_file": "docs/decisions/ADR-001-custom-min-heap.md"
+    },
+    {
+      "id": "doc_adr002",
+      "label": "ADR-002 (Dear ImGui + OpenGL3 / GLFW)",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "document",
+      "norm_label": "adr-002 (dear imgui + opengl3 / glfw)",
+      "source_file": "docs/decisions/ADR-002-dear-imgui-glfw.md"
+    },
+    {
+      "id": "doc_adr003",
+      "label": "ADR-003 (Protocolo Manchester & Estabilidad FIFO)",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "document",
+      "norm_label": "adr-003 (protocolo manchester & estabilidad fifo)",
+      "source_file": "docs/decisions/ADR-003-manchester-triage-tiebreaking.md"
+    },
+    {
+      "id": "doc_plan_equipo",
+      "label": "PLAN-DE-TRABAJO-EQUIPO.md (Roles: Anthony, Mateo, Alejandro)",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "document",
+      "norm_label": "plan-de-trabajo-equipo.md (roles: anthony, mateo, alejandro)",
+      "source_file": "docs/PLAN-DE-TRABAJO-EQUIPO.md"
+    },
+    {
+      "id": "doc_readme",
+      "label": "README.md (Manual Principal & Guia Docente)",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "document",
+      "norm_label": "readme.md (manual principal & guia docente)",
+      "source_file": "README.md"
+    },
+    {
+      "id": "doc_spec",
+      "label": "SPEC-triage-system.md (PRD & Arquitectura)",
+      "community": 0,
+      "community_name": "Cola de Prioridad (Nodos Dinamicos)",
+      "file_type": "document",
+      "norm_label": "spec-triage-system.md (prd & arquitectura)",
+      "source_file": "docs/SPEC-triage-system.md"
+    },
+    {
+      "id": "gl",
+      "label": "gl",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "gl",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "glfw3",
+      "label": "glfw3",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "glfw3",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "imgui",
+      "label": "imgui",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "imgui",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "imgui_impl_glfw",
+      "label": "imgui_impl_glfw",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "imgui_impl_glfw",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "imgui_impl_opengl3",
+      "label": "imgui_impl_opengl3",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "imgui_impl_opengl3",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "imgui_impl_win32",
+      "label": "imgui_impl_win32",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "imgui_impl_win32",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "windows",
+      "label": "windows",
+      "community": 1,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "windows",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "cstdio",
+      "label": "cstdio",
+      "community": 3,
+      "community_name": "Dominio de Paciente y Triaje",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "cstdio",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ctime",
+      "label": "ctime",
+      "community": 3,
+      "community_name": "Dominio de Paciente y Triaje",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ctime",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "iostream",
+      "label": "iostream",
+      "community": 3,
+      "community_name": "Dominio de Paciente y Triaje",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "iostream",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "cctype",
+      "label": "cctype",
+      "community": 4,
+      "community_name": "Validacion Clinica de Datos",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "cctype",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "cassert",
+      "label": "cassert",
+      "community": 5,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "cassert",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "cstring",
+      "label": "cstring",
+      "community": 5,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "cstring",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "doc_pruebas",
+      "label": "GUIA-DE-PRUEBAS-Y-DEFENSA.md (Sustentacion)",
+      "community": 5,
+      "community_name": "Interfaz Grafica (Dear ImGui)",
+      "file_type": "document",
+      "norm_label": "guia-de-pruebas-y-defensa.md (sustentacion)",
+      "source_file": "docs/GUIA-DE-PRUEBAS-Y-DEFENSA.md"
+    }
+  ],
+  "links": [
+    {
+      "source": "src_interfaz_atenderpaciente",
+      "target": "src_interfaz_obtenernombreprioridad",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L230",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_dibujarinterfaz",
+      "target": "src_interfaz_cargarpacientesdemo",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L576",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_dibujarinterfaz",
+      "target": "src_interfaz_obtenercolor",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L591",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_dibujarinterfaz",
+      "target": "src_interfaz_dibujartitulo",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L620",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_dibujarinterfaz",
+      "target": "src_interfaz_agregarpaciente",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L700",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_dibujarinterfaz",
+      "target": "src_interfaz_dibujarvistaprevia",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L739",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_dibujarinterfaz",
+      "target": "src_interfaz_atenderpaciente",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L792",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_dibujarinterfaz",
+      "target": "src_interfaz_dibujartarjeta",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L837",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_dibujarinterfaz",
+      "target": "src_interfaz_obtenernombreprioridad",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L921",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_dibujartarjeta",
+      "target": "src_interfaz_obtenercolor",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L256",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_dibujartarjeta",
+      "target": "src_interfaz_obtenernombreprioridad",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L306",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_dibujarvistaprevia",
+      "target": "src_interfaz_dibujartitulo",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L370",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_dibujarvistaprevia",
+      "target": "src_interfaz_obtenercolor",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L377",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_dibujarvistaprevia",
+      "target": "src_interfaz_obtenernombreprioridad",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L402",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_dibujarvistaprevia",
+      "target": "src_interfaz_obtenertiempoobjetivo",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L408",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_ejecutarinterfaz",
+      "target": "src_interfaz_cargarfuentessistema",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L1107",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_ejecutarinterfaz",
+      "target": "src_interfaz_configurarestilo",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L1108",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_ejecutarinterfaz",
+      "target": "src_interfaz_dibujarinterfaz",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L1131",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_main",
+      "target": "src_main_ejecutarpruebasunitarias",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/main.cpp",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_main",
+      "target": "src_main_mostrarayuda",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/main.cpp",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion_validarnombre",
+      "target": "src_validacion_textovacio",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/validacion.h",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion_validarnombre",
+      "target": "src_validacion_nombrecontienesololetras",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/validacion.h",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion_validarpaciente",
+      "target": "src_validacion_validaredad",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/validacion.h",
+      "source_location": "L108",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion_validarpaciente",
+      "target": "src_validacion_validarsintomas",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/validacion.h",
+      "source_location": "L114",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion_validarpaciente",
+      "target": "src_validacion_validarprioridad",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/validacion.h",
+      "source_location": "L120",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion_validarpaciente",
+      "target": "src_validacion_textovacio",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/validacion.h",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion_validarpaciente",
+      "target": "src_validacion_nombrecontienesololetras",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/validacion.h",
+      "source_location": "L96",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion_validarsintomas",
+      "target": "src_validacion_textovacio",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/validacion.h",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_frente",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_fin",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_cantidad",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_totaloperaciones",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_nodo",
+      "target": "src_colaprioridad_nodo_prioridad",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_nodo",
+      "target": "src_colaprioridad_nodo_dato",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_nodo",
+      "target": "src_colaprioridad_nodo_sig",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_paciente_paciente",
+      "target": "src_paciente_paciente_id",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/Paciente.h",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_paciente_paciente",
+      "target": "src_paciente_paciente_nombre",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/Paciente.h",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_paciente_paciente",
+      "target": "src_paciente_paciente_edad",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/Paciente.h",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "src_paciente_paciente",
+      "target": "src_paciente_paciente_sintomas",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/Paciente.h",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "src_paciente_paciente",
+      "target": "src_paciente_paciente_horaingreso",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/Paciente.h",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_nodo",
+      "target": "src_colaprioridad_h_t",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_paciente_paciente",
+      "target": "src_paciente_h_string",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "src/Paciente.h",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_interfaz_h_src_interfaz",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "imgui",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "imgui_impl_opengl3",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "windows",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_paciente",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "gl",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "imgui_impl_win32",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "imgui_impl_glfw",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "glfw3",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_colaprioridad",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_operaciones_colapriori",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_validacion",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_paciente_h_string",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "cstring",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "cstdio",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "iostream",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/main.cpp",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "cstring",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/main.cpp",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "cassert",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/main.cpp",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "src_interfaz_h_src_interfaz",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/main.cpp",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "src_paciente",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/main.cpp",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "src_colaprioridad",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/main.cpp",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "src_operaciones_colapriori",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/main.cpp",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "src_validacion",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/main.cpp",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "iostream",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_colaprioridad",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_paciente",
+      "target": "src_paciente_h_string",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/Paciente.h",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_paciente",
+      "target": "iostream",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/Paciente.h",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_paciente",
+      "target": "ctime",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/Paciente.h",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_paciente",
+      "target": "cstdio",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/Paciente.h",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion",
+      "target": "src_paciente_h_string",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/validacion.h",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion",
+      "target": "cctype",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/validacion.h",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_nodo_nodo",
+      "target": "src_colaprioridad_h_t",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cargarfuentessistema",
+      "target": "imguiio",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L982",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_dibujartarjeta",
+      "target": "src_paciente_paciente",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L254",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_wndprocwin32",
+      "target": "hwnd",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L1038",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_wndprocwin32",
+      "target": "lparam",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L1038",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_wndprocwin32",
+      "target": "uint",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L1038",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_wndprocwin32",
+      "target": "wparam",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L1038",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_consultarfrente",
+      "target": "src_operaciones_colapriori_h_t",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L94",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_consultarfrenteconprioridad",
+      "target": "src_operaciones_colapriori_h_t",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_desencolar",
+      "target": "src_operaciones_colapriori_h_t",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_desencolarconprioridad",
+      "target": "src_operaciones_colapriori_h_t",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_eliminarenposicion",
+      "target": "src_operaciones_colapriori_h_t",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L186",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_encolar",
+      "target": "src_operaciones_colapriori_h_t",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_obtenerelemento",
+      "target": "src_operaciones_colapriori_h_t",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L149",
+      "weight": 1.0
+    },
+    {
+      "source": "src_paciente_paciente_paciente",
+      "target": "src_paciente_h_string",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/Paciente.h",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion_nombrecontienesololetras",
+      "target": "src_validacion_h_string",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/validacion.h",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion_textovacio",
+      "target": "src_validacion_h_string",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/validacion.h",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion_validarnombre",
+      "target": "src_validacion_h_string",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/validacion.h",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion_validarpaciente",
+      "target": "src_validacion_h_string",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/validacion.h",
+      "source_location": "L83",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion_validarsintomas",
+      "target": "src_validacion_h_string",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "src/validacion.h",
+      "source_location": "L65",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_obtenercolor",
+      "target": "imvec4",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_obtenernombreprioridad",
+      "target": "src_interfaz_cpp_string",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L73",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_wndprocwin32",
+      "target": "lresult",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L1038",
+      "weight": 1.0
+    },
+    {
+      "source": "src_paciente_paciente_obtenerhoraactual",
+      "target": "src_paciente_h_string",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "source_file": "src/Paciente.h",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad",
+      "target": "src_colaprioridad_cola",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_nodo",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_interfaz_dibujartitulo",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L102",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_interfaz_wndprocwin32",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L1038",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_interfaz_ejecutarinterfaz",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L1154",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_interfaz_configurarestilo",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L116",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_interfaz_agregarpaciente",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L159",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_interfaz_atenderpaciente",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L210",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_interfaz_cargarpacientesdemo",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L238",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_interfaz_dibujartarjeta",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L254",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_interfaz_dibujarvistaprevia",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L360",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_interfaz_dibujarinterfaz",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L529",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_interfaz_obtenercolor",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_interfaz_obtenernombreprioridad",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L73",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_interfaz_obtenertiempoobjetivo",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L86",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_cpp_src_interfaz",
+      "target": "src_interfaz_cargarfuentessistema",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L982",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "src_main_ejecutarpruebasunitarias",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main.cpp",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "src_main_mostrarayuda",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main.cpp",
+      "source_location": "L57",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "src_main_main",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main.cpp",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_consultarfrenteconprioridad",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_mostrarestado",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_limpiar",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L134",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_obtenerelemento",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L149",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_obtenerposicioninsercion",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L173",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_cola",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_eliminarenposicion",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L186",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_actualizarprioridad",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L219",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_verificar_vacio",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_contarporprioridad",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L234",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_obtenerdireccionnodo",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L247",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_obtenerdireccionsiguiente",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L259",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_obtenertotaloperaciones",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L274",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_mostrar_tamanio",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_mayorprioridad",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_encolar",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_desencolar",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_desencolarconprioridad",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori",
+      "target": "src_operaciones_colapriori_cola_t_consultarfrente",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L94",
+      "weight": 1.0
+    },
+    {
+      "source": "src_paciente",
+      "target": "src_paciente_paciente",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/Paciente.h",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion",
+      "target": "src_validacion_nombrecontienesololetras",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/validacion.h",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion",
+      "target": "src_validacion_validarnombre",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/validacion.h",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion",
+      "target": "src_validacion_validaredad",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/validacion.h",
+      "source_location": "L59",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion",
+      "target": "src_validacion_validarsintomas",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/validacion.h",
+      "source_location": "L65",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion",
+      "target": "src_validacion_validarprioridad",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/validacion.h",
+      "source_location": "L77",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion",
+      "target": "src_validacion_textovacio",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/validacion.h",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_validacion",
+      "target": "src_validacion_validarpaciente",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/validacion.h",
+      "source_location": "L83",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_cola",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_verificar_vacio",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_mostrar_tamanio",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_encolar",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_desencolar",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_desencolarconprioridad",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_consultarfrente",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_consultarfrenteconprioridad",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_mostrarestado",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_limpiar",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_mayorprioridad",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_obtenerelemento",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L39",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_obtenerposicioninsercion",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_eliminarenposicion",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_actualizarprioridad",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_contarporprioridad",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_obtenerdireccionnodo",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_obtenerdireccionsiguiente",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_cola",
+      "target": "src_colaprioridad_cola_obtenertotaloperaciones",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "src_colaprioridad_nodo",
+      "target": "src_colaprioridad_nodo_nodo",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/colaPrioridad.h",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_paciente_paciente",
+      "target": "src_paciente_paciente_siguienteid",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/Paciente.h",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "src_paciente_paciente",
+      "target": "src_paciente_paciente_obtenerhoraactual",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/Paciente.h",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "src_paciente_paciente",
+      "target": "src_paciente_paciente_paciente",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/Paciente.h",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "src_interfaz_agregarpaciente",
+      "target": "src_validacion_validarpaciente",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "src/interfaz.cpp",
+      "source_location": "L168",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_ejecutarpruebasunitarias",
+      "target": "src_validacion_validarpaciente",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "src/main.cpp",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main_main",
+      "target": "src_interfaz_ejecutarinterfaz",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "src/main.cpp",
+      "source_location": "L87",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_actualizarprioridad",
+      "target": "src_colaprioridad_cola_eliminarenposicion",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L225",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_actualizarprioridad",
+      "target": "src_colaprioridad_cola_encolar",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L229",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_cola",
+      "target": "src_colaprioridad_cola_limpiar",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_consultarfrente",
+      "target": "src_colaprioridad_cola_verificar_vacio",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L95",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_consultarfrenteconprioridad",
+      "target": "src_colaprioridad_cola_verificar_vacio",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L105",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_desencolar",
+      "target": "src_colaprioridad_cola_desencolarconprioridad",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L68",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_desencolarconprioridad",
+      "target": "src_colaprioridad_cola_verificar_vacio",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L73",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_eliminarenposicion",
+      "target": "src_colaprioridad_cola_verificar_vacio",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L187",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_eliminarenposicion",
+      "target": "src_colaprioridad_cola_desencolar",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L192",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_encolar",
+      "target": "src_colaprioridad_cola_verificar_vacio",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_encolar",
+      "target": "src_colaprioridad_cola_mayorprioridad",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "src_operaciones_colapriori_cola_t_mostrarestado",
+      "target": "src_colaprioridad_cola_verificar_vacio",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "src/operaciones_colaPriori.h",
+      "source_location": "L123",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_readme",
+      "target": "doc_spec",
+      "relation": "documents",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md"
+    },
+    {
+      "source": "doc_plan_equipo",
+      "target": "doc_readme",
+      "relation": "governs",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/PLAN-DE-TRABAJO-EQUIPO.md"
+    },
+    {
+      "source": "doc_spec",
+      "target": "doc_adr001",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SPEC-triage-system.md"
+    },
+    {
+      "source": "doc_spec",
+      "target": "doc_adr002",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SPEC-triage-system.md"
+    },
+    {
+      "source": "doc_spec",
+      "target": "doc_adr003",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SPEC-triage-system.md"
+    },
+    {
+      "source": "doc_adr001",
+      "target": "src_colaprioridad_cola",
+      "relation": "specifies",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/decisions/ADR-001-custom-min-heap.md"
+    },
+    {
+      "source": "doc_adr002",
+      "target": "src_interfaz_dibujarinterfaz",
+      "relation": "specifies",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/decisions/ADR-002-dear-imgui-glfw.md"
+    },
+    {
+      "source": "doc_adr003",
+      "target": "src_colaprioridad_cola_encolar",
+      "relation": "specifies",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/decisions/ADR-003-manchester-triage-tiebreaking.md"
+    },
+    {
+      "source": "doc_pruebas",
+      "target": "src_main_ejecutarpruebasunitarias",
+      "relation": "specifies",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/GUIA-DE-PRUEBAS-Y-DEFENSA.md"
+    },
+    {
+      "source": "doc_spec",
+      "target": "src_paciente",
+      "relation": "specifies",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/SPEC-triage-system.md"
+    },
+    {
+      "source": "doc_pruebas",
+      "target": "doc_spec",
+      "relation": "verifies",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/GUIA-DE-PRUEBAS-Y-DEFENSA.md"
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "3b37c8b1a15677422c3ba5aab036e56613110740"
+}

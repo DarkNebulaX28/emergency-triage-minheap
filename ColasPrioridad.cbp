@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="ColasPrioridad" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/ColasPrioridad" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="." />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++17" />
+					<Add option="-g" />
+					<Add directory="src" />
+					<Add directory="external/imgui" />
+					<Add directory="external/imgui/backends" />
+					<Add directory="external/glfw-3.5.1.bin.WIN64/include" />
+				</Compiler>
+				<Linker>
+					<Add library="external/glfw-3.5.1.bin.WIN64/lib-mingw-w64/libglfw3.a" />
+					<Add library="opengl32" />
+					<Add library="gdi32" />
+					<Add library="imm32" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/ColasPrioridad" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="." />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-std=c++17" />
+					<Add directory="src" />
+					<Add directory="external/imgui" />
+					<Add directory="external/imgui/backends" />
+					<Add directory="external/glfw-3.5.1.bin.WIN64/include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="external/glfw-3.5.1.bin.WIN64/lib-mingw-w64/libglfw3.a" />
+					<Add library="opengl32" />
+					<Add library="gdi32" />
+					<Add library="imm32" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="src/Paciente.h" />
+		<Unit filename="src/colaPrioridad.h" />
+		<Unit filename="src/interfaz.cpp" />
+		<Unit filename="src/interfaz.h" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/operaciones_colaPriori.h" />
+		<Unit filename="src/validacion.h" />
+		<Unit filename="external/imgui/imgui.cpp" />
+		<Unit filename="external/imgui/imgui_draw.cpp" />
+		<Unit filename="external/imgui/imgui_tables.cpp" />
+		<Unit filename="external/imgui/imgui_widgets.cpp" />
+		<Unit filename="external/imgui/backends/imgui_impl_glfw.cpp" />
+		<Unit filename="external/imgui/backends/imgui_impl_opengl3.cpp" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

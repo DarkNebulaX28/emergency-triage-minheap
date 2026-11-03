@@ -1,29 +1,66 @@
 # Build directories
 build/
-bin/
-out/
-.cache/
-
-# IDE / Editor configuration
-.vscode/
-.vs/
-*.sln
-*.vcxproj*
-*.user
-.idea/
 cmake-build-*/
+out/
+bin/
+obj/
 
-# Compiled binaries and libraries
-*.exe
+# Compiled Object files & Executables
+*.slo
+*.lo
 *.o
 *.obj
+*.exe
+*.out
+*.app
 *.dll
 *.so
 *.dylib
-*.a
-*.lib
 
-# Temporary & OS files
+# Code::Blocks & IDE temporary files
+*.depend
+*.layout
+imgui.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Graphify temporary cache
+graphify-out/.graphify_*
+graphify-out/cache/
+
+# Unused third-party vendor extras (keep repo lightweight)
+external/imgui/.editorconfig
+external/imgui/.gitattributes
+external/imgui/.gitignore
+external/imgui/.github/
+external/imgui/LICENSE.txt
+external/imgui/docs/
+external/imgui/examples/
+external/imgui/misc/
+external/imgui/backends/*
+!external/imgui/backends/imgui_impl_glfw.cpp
+!external/imgui/backends/imgui_impl_glfw.h
+!external/imgui/backends/imgui_impl_opengl3.cpp
+!external/imgui/backends/imgui_impl_opengl3_loader.h
+!external/imgui/backends/imgui_impl_opengl3.h
+!external/imgui/backends/imgui_impl_win32.cpp
+!external/imgui/backends/imgui_impl_win32.h
+external/glfw-3.5.1.bin.WIN64/README.md
+external/glfw-3.5.1.bin.WIN64/docs/
+external/glfw-3.5.1.bin.WIN64/lib-mingw-w64/glfw3.dll
+external/glfw-3.5.1.bin.WIN64/lib-mingw-w64/libglfw3dll.a
+external/glfw-3.5.1.bin.WIN64/lib-static-ucrt/
+external/glfw-3.5.1.bin.WIN64/lib-vc2015/
+external/glfw-3.5.1.bin.WIN64/lib-vc2017/
+external/glfw-3.5.1.bin.WIN64/lib-vc2019/
+external/glfw-3.5.1.bin.WIN64/lib-vc2022/glfw3.dll
+external/glfw-3.5.1.bin.WIN64/lib-vc2022/glfw3_mt.lib
+external/glfw-3.5.1.bin.WIN64/lib-vc2022/glfw3dll.lib
+external/glfw-3.5.1.bin.WIN64/lib-vc2026/
+
+# OS files
 .DS_Store
 Thumbs.db
-*.log

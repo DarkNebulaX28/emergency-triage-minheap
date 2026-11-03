@@ -1,87 +1,61 @@
-# 🎓 Guía de Pruebas y Defensa Académica
+# Guía de Pruebas, Demostración y Defensa Académica — MediPriority
 
-Este documento está diseñado para que el equipo prepare la sustentación del proyecto ante el docente y valide el correcto funcionamiento del **Min-Heap** y el **Sistema de Triage**.
-
----
-
-## 🧪 1. Batería de Casos de Prueba Críticos
-
-Para demostrar que la estructura de datos no presenta fallas, se deben ejecutar los siguientes escenarios en la interfaz gráfica o mediante pruebas unitarias:
-
-### Caso de Prueba 1: Flotación a la Raíz (`heapifyUp` $O(\log n)$)
-* **Objetivo:** Probar que un paciente crítico desplaza a pacientes de menor gravedad hasta ubicarse en la raíz (`index 0`).
-* **Pasos:**
-  1. Registrar 3 pacientes Nivel 4 (Verde).
-  2. Registrar 1 paciente Nivel 1 (Rojo - Paro Cardiorrespiratorio).
-* **Resultado Esperado:**
-  * En la sala de espera y en el Inspector de Memoria (`buffer[0]`), el paciente Nivel 1 debe quedar automáticamente en la primera posición.
-  * Al presionar *"Llamar Siguiente"*, sale el paciente Nivel 1 inmediatamente.
+Este documento detalla el protocolo paso a paso para demostrar el funcionamiento del sistema **MediPriority** ante el docente durante la revisión del proyecto.
 
 ---
 
-### Caso de Prueba 2: Estabilidad y Desempate FIFO (Mismo Nivel de Triage)
-* **Objetivo:** Demostrar que a igual prioridad clínica se respeta estrictamente el orden de llegada.
-* **Pasos:**
-  1. Registrar al paciente "Ana Gómez" como Nivel 2 (Naranja) a las 10:00:01 (Turno #1).
-  2. Registrar al paciente "Luis Pérez" como Nivel 2 (Naranja) a las 10:00:15 (Turno #2).
-* **Resultado Esperado:**
-  * Ambos tienen gravedad 2, pero "Ana Gómez" debe estar antes en la cola de atención por tener `arrivalSequence = 1`.
-  * Al llamar al siguiente paciente, se atiende a "Ana Gómez" y luego a "Luis Pérez".
+## 1. Ejecución de la Suite de Pruebas Unitarias (Verificación en Consola)
+
+Antes de abrir la interfaz gráfica, se puede demostrar en 2 segundos que toda la lógica algorítmica pasa pruebas automatizadas ejecutando:
+
+```powershell
+.\MediPriority.exe --test
+```
+
+**Qué verifica este comando frente al docente:**
+1. **Ordenamiento por Prioridad y Desempate FIFO:** Inserta pacientes en orden mezclado (`P4`, `P1`, `P3`, `P2`, `P1`) y comprueba que salgan exactamente en el orden `P1 (1º) -> P1 (2º) -> P2 -> P3 -> P4`.
+2. **Escalamiento Dinámico de Urgencia:** Comprueba que si un paciente en espera empeora y se actualiza su prioridad a `P1`, la estructura reubica su nodo inmediatamente en la cabecera de prioridad crítica.
+3. **Sanitización y Validación Clínica:** Comprueba que nombres con números (`"Juan123"`), edades negativas o mayores a 120 años, y prioridades fuera de `[1, 5]` sean rechazados automáticamente.
 
 ---
 
-### Caso de Prueba 3: Hundimiento al Extraer (`heapifyDown` $O(\log n)$)
-* **Objetivo:** Probar la reorganización correcta del árbol tras extraer la raíz.
-* **Pasos:**
-  1. Con 5 pacientes en el montículo, presionar *"Llamar Siguiente Paciente"*.
-* **Resultado Esperado:**
-  * El último elemento del arreglo se mueve a la posición `0`.
-  * El algoritmo compara con sus dos hijos (`2i+1`, `2i+2`), selecciona al de mayor severidad y desciende intercambiándose hasta restaurar la propiedad de montículo.
-  * El tamaño del Heap se reduce exactamente en 1.
+## 2. Guion de Demostración en Vivo (Interfaz Gráfica Dear ImGui)
+
+Al ejecutar `.\MediPriority.exe` (o `.\compilar_y_ejecutar.bat`), siga estos 5 pasos para sorprender al evaluador:
+
+### Paso 1: Carga Instantánea del Escenario Clínico (`Cargar Demo (6)`)
+1. Haga clic en el botón azul **"Cargar Demo (6)"** ubicado en el panel izquierdo (*Registro de Triage*).
+2. Observe cómo los indicadores KPI superiores se actualizan inmediatamente mostrando el desglose por nivel (`P1 Crítico`, `P2 Emergencia`, `P3 Urgencia`, `P4 Menor`, `P5 No Urgente`).
+3. En el panel derecho se visualizarán las **tarjetas de nodos enlazados** conectadas por flechas `sig -->` hasta `[ nullptr (FIN) ]`.
+
+### Paso 2: Demostración de Previsualización de Inserción y Desempate FIFO
+1. En el formulario de admisión, escriba un paciente nuevo (ej. Nombre: `Roberto Gomez`, Edad: `58`, Síntomas: `Dolor precordial agudo`).
+2. Seleccione el botón rápido **`P1`** o **`P2`**.
+3. Señale el recuadro **"Previsualización de inserción"**: el sistema calcula en vivo en qué posición exacta de la lista enlazada se insertará el nodo respetando a los pacientes de igual prioridad que llegaron antes.
+4. Presione **"Registrar en Cola"**.
+
+### Paso 3: Atención Médica en Tiempo Real (`Atender Siguiente`)
+1. Presione el botón verde **"Atender Siguiente (Frente)"**.
+2. Observe cómo el nodo del frente (`CABECERA`) se desencola en tiempo $O(1)$ y pasa al panel superior **"BOX MÉDICO EN ATENCIÓN"**, mostrando su Ticket `#ID`, nombre, edad, hora de ingreso, cuadro clínico y nivel de prioridad.
+
+### Paso 4: Re-Triage por Empeoramiento Clínico (`^ Subir Urgencia`)
+1. Ubique cualquier tarjeta de paciente con prioridad `P3`, `P4` o `P5` en la cola visual.
+2. Presione el botón **`^ Subir Urgencia`** dentro de su tarjeta.
+3. El paciente subirá un nivel de gravedad (ej. de `P3` a `P2`) y su nodo se reordenará automáticamente en la lista enlazada.
+
+### Paso 5: Auditoría de Memoria Física (`Inspector de Punteros y Memoria RAM`)
+1. Active la casilla **"Mostrar Inspector de Punteros y Memoria RAM (Nodo*)"** arriba de la cola visual.
+2. Se desplegará una tabla técnica con las columnas:
+   * `# Pos`
+   * `Ticket`
+   * `Dirección Nodo* (RAM)` (ej. `0x02A4F810`)
+   * `Puntero siguiente*` (que coincide exactamente con la dirección `Nodo*` de la fila siguiente, demostrando ante el ingeniero que es una estructura enlazada real en memoria dinámica).
 
 ---
 
-### Caso de Prueba 4: Realocación Dinámica de Memoria ($2 \times$)
-* **Objetivo:** Probar que la estructura no se desborda cuando se supera la capacidad inicial.
-* **Pasos:**
-  1. Iniciar con capacidad inicial de 4 elementos.
-  2. Insertar 10 pacientes consecutivos.
-* **Resultado Esperado:**
-  * El arreglo dinámico duplica su capacidad automáticamente (`4 -> 8 -> 16`) sin perder datos ni corromper las relaciones padre-hijo.
-  * Cero fugas de memoria (*no memory leaks*).
+## 3. Preguntas Frecuentes de Defensa Académica
 
----
-
-### Caso de Prueba 5: Resiliencia ante Cola Vacía
-* **Objetivo:** Evitar accesos indebidos de memoria cuando no hay pacientes.
-* **Pasos:**
-  1. Con 0 pacientes en espera, presionar *"Llamar Siguiente Paciente"*.
-* **Resultado Esperado:**
-  * El sistema no produce *Segmentation Fault* ni cuelgues.
-  * La interfaz muestra un mensaje informativo claro: *"No hay pacientes en espera"*.
-
----
-
-## 💬 2. Preguntas Típicas del Docente y Cómo Responderlas
-
-### P1: "¿Por qué usaron un arreglo y no un árbol con punteros `left`, `right` y `parent`?"
-> **Respuesta:**  
-> *"Un montículo binario es por definición un árbol binario casi completo. Si usáramos nodos enlazados dispersos, encontrar el último nodo para insertar o extraer requeriría $O(\log n)$ pasos complejos y fragmentaría la memoria. En un arreglo contiguo, calcular el padre `(i-1)/2` o los hijos `2i+1` y `2i+2` toma tiempo $O(1)$ directo por aritmética de índices y aprovecha al máximo la memoria caché del procesador."*
-
----
-
-### P2: "¿Por qué un Min-Heap y no un Max-Heap?"
-> **Respuesta:**  
-> *"En los sistemas internacionales de triage médico (como el Protocolo de Manchester), los códigos de gravedad son numéricos: Nivel 1 es Resucitación (máxima urgencia) y Nivel 5 es No Urgente (mínima urgencia). Con un Min-Heap, el número 1 queda naturalmente en la raíz sin necesidad de invertir artificialmente los valores."*
-
----
-
-### P3: "¿Cómo solucionaron el problema de que el Heap no es una estructura estable?"
-> **Respuesta:**  
-> *"Un montículo binario clásico no garantiza orden FIFO en caso de empates. Para solucionarlo, creamos la estructura `TriageComparator` con ordenamiento lexicográfico: primero compara el nivel de urgencia; si los niveles son iguales, desempata comparando el campo `arrivalSequence`, que es un número correlativo asignado estrictamente por orden de llegada."*
-
----
-
-### P4: "¿Dónde está demostrado que no usaron `std::priority_queue`?"
-> **Respuesta:**  
-> *"En la carpeta `src/Core/`, en los archivos `PriorityQueue.hpp` y `DynamicArray.hpp`. Toda la gestión de memoria con punteros (`new[]` / `delete[]`), la duplicación dinámica de capacidad y los métodos de flotación (`heapifyUp`) y hundimiento (`heapifyDown`) fueron programados a mano desde cero."*
+* **¿Por qué el desempate FIFO funciona sin necesidad de comparar timestamps al insertar?**
+  Porque el ciclo de inserción en `Cola<T>::encolar` utiliza la condición `actual->siguiente->prioridad <= prioridad`. Al usar `<=` en lugar de `<`, el nuevo nodo recorre y rebasa a todos los nodos existentes que tienen su misma prioridad, colocándose justo detrás del último de su categoría.
+* **¿Cómo se evita las fugas de memoria (*Memory Leaks*)?**
+  Cada `new Nodo<T>` reservado en `encolar()` tiene su correspondiente `delete temp` en `desencolar()`, `desencolarConPrioridad()`, `eliminarEnPosicion()`, `vaciar()` y en el destructor `~Cola()`.

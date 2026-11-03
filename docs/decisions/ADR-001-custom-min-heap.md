@@ -1,46 +1,23 @@
-# ADR-001: Implementación Manual de Min-Heap Binario en Arreglo Contiguo
+# ADR-001: Implementación de Cola de Prioridad Dinámica Enlazada con Estabilidad FIFO
 
-## Estado
-Aceptado
-
-## Fecha
-2026-10-29
+* **Fecha:** 2026-11-03
+* **Estado:** Aceptado e Implementado
 
 ## Contexto
-El requerimiento académico de la materia **Estructura de Datos** exige implementar una estructura de **Cola de Prioridad** en C++ desde cero, con prohibición estricta de utilizar contenedores o adaptadores prefabricados de la biblioteca estándar (como `std::priority_queue`, `std::vector`, `std::list`).
 
-Es indispensable seleccionar la representación interna más adecuada para soportar operaciones eficientes de inserción ($O(\log n)$) y extracción de la máxima prioridad ($O(\log n)$), manteniendo simplicidad de gestión de memoria y facilidad de demostración para el evaluador.
+El sistema de Triage Hospitalario (**MediPriority**) requiere administrar pacientes según 5 niveles de urgencia clínica (`1 = Resucitación` a `5 = No Urgente`) sin utilizar contenedores de prioridad prefabricados de la STL (`std::priority_queue`). Además, la defensa académica exige poder visualizar explícitamente el enlace entre nodos y garantizar que dos pacientes con el mismo nivel de prioridad sean atendidos en estricto orden de llegada (**FIFO**).
 
 ## Decisión
-Se implementará una clase plantilla `CustomMinHeap<T, Comparator>` construida sobre un **arreglo contiguo de memoria dinámica** administrado manualmente mediante punteros (`T* buffer`), capacidad inicial y estrategia de duplicación de tamaño ($2 \times$).
 
-La navegación del árbol binario completo se realizará mediante aritmética de índices:
-* Padre de $i$: `(i - 1) / 2`
-* Hijo izquierdo de $i$: `2 * i + 1`
-* Hijo derecho de $i$: `2 * i + 2`
+Implementar una plantilla genérica **`Cola<T>`** basada en una **lista simplemente enlazada ordenada por prioridad** mediante nodos dinámicos (`Nodo<T>` con puntero `Nodo<T>* siguiente` y puntero de cabecera `frente`), complementada con métodos de inspección de direcciones físicas de memoria (`obtenerDireccionNodo` y `obtenerDireccionSiguiente`).
 
-## Alternativas Consideradas
+## Justificación Técnica
 
-### 1. `std::priority_queue` de la STL
-* **Ventajas:** Ya optimizada y probada.
-* **Motivo de Rechazo:** Prohibida explícitamente por los requisitos del proyecto universitario. No demuestra dominio de punteros, manejo de montículos ni algoritmos de flotación/hundimiento.
-
-### 2. Árbol Binario mediante Nodos Enlazados con Punteros (`Node* left, Node* right, Node* parent`)
-* **Ventajas:** Conceptualmente representa un árbol gráfico con nodos.
-* **Desventajas:** 
-  * Localizar el último nodo para insertar o extraer requiere $O(\log n)$ pasos complejos o mantener punteros auxiliares intrincados.
-  * Dispersión en memoria dinámica (fragmentación de heap y *cache misses*).
-* **Motivo de Rechazo:** Un montículo binario es por definición un árbol casi completo (*complete binary tree*), cuya representación óptima natural es un arreglo contiguo.
-
-### 3. Lista Enlazada Simplemente Ordenada
-* **Ventajas:** Fácil de extraer el primero ($O(1)$).
-* **Desventajas:** La inserción requiere búsqueda lineal de la posición correcta ($O(n)$).
-* **Motivo de Rechazo:** Degrada el rendimiento teórico requerido para una cola de prioridad eficiente.
+1. **Estabilidad FIFO Natural y Determinista:** En una lista enlazada ordenada con inserción mediante `actual->siguiente->prioridad <= prioridad`, la estabilidad cronológica ante prioridades iguales se preserva de forma nativa sin requerir contadores secundarios de desempate ni reordenamientos no estables.
+2. **Despacho Médico en Tiempo Constante $O(1)$:** El paciente más crítico siempre se encuentra en el puntero `frente`. Extraerlo para atención médica (`desencolar` / `desencolarConPrioridad`) toma tiempo $O(1)$ exacto.
+3. **Transparencia Pedagógica e Inspección de Punteros:** Cada paciente reside en una dirección independiente del *heap* (`new Nodo<T>`), lo que permite mostrar en la interfaz gráfica de Dear ImGui la cadena exacta de punteros `Nodo* -> siguiente* -> nullptr`.
 
 ## Consecuencias
-* **Positivas:**
-  * Cumplimiento estricto de los requisitos de la cátedra de Estructura de Datos.
-  * Localidad de referencia en memoria caché óptima.
-  * Facilidad absoluta para inspeccionar el arreglo en la interfaz gráfica (exponer `buffer[0..size-1]`).
-* **Negativas / Desafíos:**
-  * Requiere implementar manualmente la regla de los 5 (Constructor de copia, operador de asignación de copia, constructor de movimiento, operador de asignación de movimiento y destructor) para evitar fugas de memoria (*memory leaks*).
+
+* **Positivas:** Extracción $O(1)$, estabilidad FIFO garantizada, soporte directo para re-priorización (`actualizarPrioridad`) y eliminación posicional (`eliminarEnPosicion`), y visualización gráfica intuitiva de nodos enlazados.
+* **Mitigación de Memoria:** El destructor `~Cola()` y el método `vaciar()` liberan todos los nodos dinámicos garantizando cero fugas de memoria (*zero memory leaks*).
