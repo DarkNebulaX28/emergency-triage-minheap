@@ -33,6 +33,10 @@ public:
     void limpiar();
 
     bool mayorPrioridad(const int prioA, const int prioB);
+
+    bool obtenerElemento(int posicion, T& dato, int& prioridad) const;
+
+    int obtenerPosicionInsercion(int prioridad) const;
 };
 
 
