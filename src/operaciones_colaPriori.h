@@ -128,6 +128,45 @@ void Cola<T>::limpiar(){
     cantidad = 0;
 }
 
+template<typename T>
+bool Cola<T>::obtenerElemento(int posicion, T& dato, int& prioridad) const {
 
+    if (posicion < 0 || posicion >= cantidad) {
+        return false;
+    }
+
+    Nodo* actual = frente;
+    int indice = 0;
+
+    while (actual != nullptr && indice < posicion) {
+        actual = actual->sig;
+        indice++;
+    }
+
+    if (actual == nullptr) {
+        return false;
+    }
+
+    dato = actual->dato;
+    prioridad = actual->prioridad;
+
+    return true;
+}
+
+template<typename T>
+int Cola<T>::obtenerPosicionInsercion(int prioridad) const {
+
+    Nodo* actual = frente;
+    int posicion = 0;
+
+    while (actual != nullptr &&
+           actual->prioridad <= prioridad) {
+
+        actual = actual->sig;
+        posicion++;
+    }
+
+    return posicion;
+}
 
 #endif //OPERACIONES_COLA_H
