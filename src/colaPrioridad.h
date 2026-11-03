@@ -39,6 +39,4 @@ public:
     int obtenerPosicionInsercion(int prioridad) const;
 };
 
-
-
 #endif //COLA_PRIORIDAD_H
