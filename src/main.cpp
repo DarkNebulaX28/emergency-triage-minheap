@@ -1,4 +1,5 @@
 #include <iostream>
+#include "interfaz.h"
 
 int main() {
     std::cout << "========================================================\n";
@@ -6,5 +7,8 @@ int main() {
     std::cout << " Catedra: Estructura de Datos                           \n";
     std::cout << " Estado: Arquitectura y esqueleto inicial configurados. \n";
     std::cout << "========================================================\n";
+
+    ejecutarInterfaz();
+    
     return 0;
 }
