@@ -993,7 +993,7 @@ void dibujarInterfaz()
     if (ImGui::InputInt("##Edad", &edad))
     {
         if (edad < 0) edad = 0;
-        if (edad > 150) edad = 150;
+        if (edad > 120) edad = 120;
     }
     ImGui::EndGroup();
 
