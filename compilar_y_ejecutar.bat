@@ -6,7 +6,6 @@ echo  MediPriority - Sistema de Triage y Priorizacion de Pacientes
 echo  Compilando proyecto C++17 con Dear ImGui + OpenGL3...
 echo ======================================================================
 
-:: Detectar g++ en PATH o en rutas estandar de Windows (MinGW / MSYS2 / CodeBlocks)
 set "GPP_CMD="
 where g++ >nul 2>nul
 if %ERRORLEVEL% EQU 0 (

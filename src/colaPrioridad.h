@@ -9,8 +9,7 @@ private:
         Nodo* sig;
         int prioridad;
 
-        Nodo(const T& valor, int prio)
-            : dato(valor), sig(nullptr), prioridad(prio) {}
+        Nodo(const T& valor, int prio);
     };
 
     Nodo* frente;
@@ -21,8 +20,8 @@ private:
 public:
     Cola();
     ~Cola();
-    Cola(const Cola&) = delete;            // Evitar copias superficiales
-    Cola& operator=(const Cola&) = delete; // Evitar asignacion superficial
+    Cola(const Cola&) = delete;
+    Cola& operator=(const Cola&) = delete;
 
     bool verificar_vacio() const;
     int mostrar_tamanio() const;
@@ -48,4 +47,4 @@ public:
     int obtenerTotalOperaciones() const;
 };
 
-#endif // COLA_PRIORIDAD_H
+#endif

@@ -3,4 +3,4 @@
 
 void ejecutarInterfaz();
 
-#endif // INTERFAZ_H
+#endif

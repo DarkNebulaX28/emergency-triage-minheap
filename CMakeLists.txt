@@ -24,10 +24,8 @@ set(SOURCES
 )
 
 if(WIN32 AND CMAKE_SIZEOF_VOID_P EQUAL 4)
-    # Compilador Windows de 32 bits (ej. MinGW clasico): usa backend nativo Win32 + WGL
     list(APPEND SOURCES ${IMGUI_DIR}/backends/imgui_impl_win32.cpp)
 else()
-    # Compilador de 64 bits: usa backend GLFW + OpenGL3
     list(APPEND SOURCES ${IMGUI_DIR}/backends/imgui_impl_glfw.cpp)
 endif()
 

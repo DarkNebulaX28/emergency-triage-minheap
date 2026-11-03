@@ -2,9 +2,68 @@
 #define OPERACIONES_COLA_H
 
 #include <iostream>
+#include "Paciente.h"
 #include "colaPrioridad.h"
 
 using namespace std;
+
+inline int Paciente::siguienteId() {
+    static int contadorId = 1;
+    return contadorId++;
+}
+
+inline string Paciente::obtenerHoraActual() {
+    std::time_t ahora = std::time(nullptr);
+    std::tm* tiempoLocal = std::localtime(&ahora);
+    if (tiempoLocal == nullptr) {
+        return "00:00:00";
+    }
+    char buffer[16];
+    std::snprintf(buffer, sizeof(buffer), "%02d:%02d:%02d",
+                  tiempoLocal->tm_hour,
+                  tiempoLocal->tm_min,
+                  tiempoLocal->tm_sec);
+    return string(buffer);
+}
+
+inline Paciente::Paciente()
+    : id(0), nombre(""), edad(0), sintomas(""), horaIngreso("--:--:--") {}
+
+inline Paciente::Paciente(string nom, int ed, string sint)
+    : id(siguienteId()),
+      nombre(nom),
+      edad(ed),
+      sintomas(sint),
+      horaIngreso(obtenerHoraActual()) {}
+
+inline Paciente::Paciente(int idManual, string nom, int ed, string sint, string hora)
+    : id(idManual),
+      nombre(nom),
+      edad(ed),
+      sintomas(sint),
+      horaIngreso(hora) {}
+
+inline int Paciente::getId() const { return id; }
+inline string Paciente::getNombre() const { return nombre; }
+inline int Paciente::getEdad() const { return edad; }
+inline string Paciente::getSintomas() const { return sintomas; }
+inline string Paciente::getHoraIngreso() const { return horaIngreso; }
+
+inline void Paciente::setNombre(const string& nom) { nombre = nom; }
+inline void Paciente::setEdad(int ed) { edad = ed; }
+inline void Paciente::setSintomas(const string& sint) { sintomas = sint; }
+
+inline ostream& operator<<(ostream& os, const Paciente& p) {
+    os << "[#" << p.id << " | " << p.horaIngreso << "] "
+       << "Paciente: " << p.nombre
+       << " | Edad: " << p.edad
+       << " | Sintomas: " << p.sintomas;
+    return os;
+}
+
+template <typename T>
+Cola<T>::Nodo::Nodo(const T& valor, int prio)
+    : dato(valor), sig(nullptr), prioridad(prio) {}
 
 template <typename T>
 Cola<T>::Cola() {
@@ -39,13 +98,13 @@ void Cola<T>::encolar(const T& valor, int prioridad) {
     Nodo* nuevo = new Nodo(valor, prioridad);
     ++totalOperaciones;
 
-    if (verificar_vacio()) { // Caso 1: Cola vacia
+    if (verificar_vacio()) {
         frente = nuevo;
         fin = nuevo;
-    } else if (mayorPrioridad(prioridad, frente->prioridad)) { // Caso 2: Nuevo debe ir al frente
+    } else if (mayorPrioridad(prioridad, frente->prioridad)) {
         nuevo->sig = frente;
         frente = nuevo;
-    } else { // Caso 3: Nuevo va en medio o al final (respeta FIFO ante igual prioridad con >=)
+    } else {
         Nodo* actual = frente;
         while (actual->sig != nullptr && prioridad >= actual->sig->prioridad) {
             actual = actual->sig;
@@ -275,4 +334,4 @@ int Cola<T>::obtenerTotalOperaciones() const {
     return totalOperaciones;
 }
 
-#endif // OPERACIONES_COLA_H
+#endif

@@ -8,8 +8,6 @@
 #include <cstring>
 #include <cstdio>
 #include <cmath>
-#include <map>
-#include <algorithm>
 
 #include "imgui.h"
 #include "imgui_impl_opengl3.h"
@@ -31,10 +29,8 @@
 
 using namespace std;
 
-// ==========================================
-// VARIABLES GLOBALES DE ESTADO
-
 Cola<Paciente> colaPacientes;
+Cola<string>   colaAlertasClinicas;
 
 ImFont* fuenteRegular = nullptr;
 ImFont* fuenteBold = nullptr;
@@ -44,36 +40,61 @@ char sintomas[256] = "";
 
 int edad = 25;
 int prioridadCombo = 0;
+int posicionUsuario = 1;
 
 string mensaje = "Sistema listo para admision de pacientes.";
 bool mensajeError = false;
 
-// Estado del consultorio activo (ultimo paciente desencolado)
 bool hayPacienteEnAtencion = false;
 Paciente ultimoPacienteAtendido;
 int prioridadUltimoAtendido = 1;
 int totalPacientesAtendidos = 0;
 
-// Modo de vista del panel inferior (0 = Tarjetas Nodos Enlazados, 1 = Tabla de Memoria)
 int modoVistaCola = 0;
-
-// Tema visual Material Design 3 (true = Tema Claro Clinico por defecto, false = Tema Oscuro)
 bool temaClaro = true;
-
-// ==========================================
-// MOTOR DE ANIMACIONES Y TRANSICIONES (EASE-OUT / SPRING INTERPOLATION)
 
 struct AnimacionNodo
 {
-    float progresoEntrada = 0.0f; // 0.0 -> 1.0 (ease-out)
-    float hoverLerp = 0.0f;       // 0.0 -> 1.0 (elevacion al pasar el cursor)
-    float flashCambio = 0.0f;     // Destello suave cuando cambia de prioridad
+    bool inicializado = false;
+    float progresoEntrada = 0.0f;
+    float hoverLerp = 0.0f;
+    float flashCambio = 0.0f;
 };
 
-static std::map<int, AnimacionNodo> g_animNodos;
+static AnimacionNodo g_animNodos[512];
 static float g_animBanner = 1.0f;
 static float g_animConsultorio = 1.0f;
 static float g_barrasKpiLerp[5] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+
+static AnimacionNodo& obtenerAnimNodo(int idTicket)
+{
+    int idx = (idTicket >= 0 && idTicket < 512) ? idTicket : (idTicket % 512);
+    if (idx < 0) idx = 0;
+    if (!g_animNodos[idx].inicializado)
+    {
+        g_animNodos[idx].inicializado = true;
+        g_animNodos[idx].progresoEntrada = 0.0f;
+        g_animNodos[idx].hoverLerp = 0.0f;
+        g_animNodos[idx].flashCambio = 0.8f;
+    }
+    return g_animNodos[idx];
+}
+
+static void limpiarAnimaciones()
+{
+    for (int i = 0; i < 512; ++i)
+    {
+        g_animNodos[i].inicializado = false;
+        g_animNodos[i].progresoEntrada = 0.0f;
+        g_animNodos[i].hoverLerp = 0.0f;
+        g_animNodos[i].flashCambio = 0.0f;
+    }
+}
+
+static float maxf(float a, float b)
+{
+    return (a > b) ? a : b;
+}
 
 static float lerpf(float a, float b, float t)
 {
@@ -97,13 +118,10 @@ static float easeOutCubic(float t)
     return 1.0f - (inv * inv * inv);
 }
 
-// ==========================================
-// PALETA CROMATICA MATERIAL DESIGN 3 (CLINICAL CLEAN UI)
-
-static const ImVec4 ACCENT_PRIMARY = ImVec4(0.102f, 0.451f, 0.910f, 1.0f); // #1A73E8 Azul Primario
-static const ImVec4 ACCENT_DANGER  = ImVec4(0.851f, 0.188f, 0.145f, 1.0f); // #D93025 Rojo Critico
-static const ImVec4 ACCENT_WARNING = ImVec4(0.953f, 0.596f, 0.000f, 1.0f); // #F29900 Ambar Urgencia
-static const ImVec4 ACCENT_SUCCESS = ImVec4(0.118f, 0.557f, 0.243f, 1.0f); // #1E8E3E Verde Clinico
+static const ImVec4 ACCENT_PRIMARY = ImVec4(0.102f, 0.451f, 0.910f, 1.0f);
+static const ImVec4 ACCENT_DANGER  = ImVec4(0.851f, 0.188f, 0.145f, 1.0f);
+static const ImVec4 ACCENT_WARNING = ImVec4(0.953f, 0.596f, 0.000f, 1.0f);
+static const ImVec4 ACCENT_SUCCESS = ImVec4(0.118f, 0.557f, 0.243f, 1.0f);
 
 ImVec4 obtenerColor(int prioridad)
 {
@@ -111,11 +129,11 @@ ImVec4 obtenerColor(int prioridad)
     {
         switch (prioridad)
         {
-            case 1: return ImVec4(0.851f, 0.188f, 0.145f, 1.0f); // Rojo #D93025 - Critica
-            case 2: return ImVec4(0.910f, 0.443f, 0.039f, 1.0f); // Naranja #E8710A - Alta
-            case 3: return ImVec4(0.820f, 0.540f, 0.000f, 1.0f); // Ambar #D18A00 - Media
-            case 4: return ImVec4(0.118f, 0.557f, 0.243f, 1.0f); // Verde #1E8E3E - Baja
-            case 5: return ImVec4(0.102f, 0.451f, 0.910f, 1.0f); // Azul #1A73E8 - Leve
+            case 1: return ImVec4(0.851f, 0.188f, 0.145f, 1.0f);
+            case 2: return ImVec4(0.910f, 0.443f, 0.039f, 1.0f);
+            case 3: return ImVec4(0.820f, 0.540f, 0.000f, 1.0f);
+            case 4: return ImVec4(0.118f, 0.557f, 0.243f, 1.0f);
+            case 5: return ImVec4(0.102f, 0.451f, 0.910f, 1.0f);
             default: return ImVec4(0.373f, 0.388f, 0.408f, 1.0f);
         }
     }
@@ -123,11 +141,11 @@ ImVec4 obtenerColor(int prioridad)
     {
         switch (prioridad)
         {
-            case 1: return ImVec4(0.949f, 0.545f, 0.510f, 1.0f); // Rojo 300 #F28B82
-            case 2: return ImVec4(0.988f, 0.678f, 0.439f, 1.0f); // Naranja 300 #FCAD70
-            case 3: return ImVec4(0.992f, 0.839f, 0.388f, 1.0f); // Amarillo 300 #FDD663
-            case 4: return ImVec4(0.506f, 0.788f, 0.584f, 1.0f); // Verde 300 #81C995
-            case 5: return ImVec4(0.541f, 0.706f, 0.973f, 1.0f); // Azul 300 #8AB4F8
+            case 1: return ImVec4(0.949f, 0.545f, 0.510f, 1.0f);
+            case 2: return ImVec4(0.988f, 0.678f, 0.439f, 1.0f);
+            case 3: return ImVec4(0.992f, 0.839f, 0.388f, 1.0f);
+            case 4: return ImVec4(0.506f, 0.788f, 0.584f, 1.0f);
+            case 5: return ImVec4(0.541f, 0.706f, 0.973f, 1.0f);
             default: return ImVec4(0.604f, 0.627f, 0.651f, 1.0f);
         }
     }
@@ -139,11 +157,11 @@ ImVec4 obtenerFondoTonalPrioridad(int prioridad)
     {
         switch (prioridad)
         {
-            case 1: return ImVec4(0.992f, 0.937f, 0.933f, 1.0f); // Tonal Rojo #FDEDED
-            case 2: return ImVec4(0.996f, 0.953f, 0.910f, 1.0f); // Tonal Naranja #FEF3E8
-            case 3: return ImVec4(0.996f, 0.969f, 0.886f, 1.0f); // Tonal Ambar #FEF7E2
-            case 4: return ImVec4(0.910f, 0.965f, 0.922f, 1.0f); // Tonal Verde #E8F6EB
-            case 5: return ImVec4(0.918f, 0.949f, 0.996f, 1.0f); // Tonal Azul #EAF2FE
+            case 1: return ImVec4(0.992f, 0.937f, 0.933f, 1.0f);
+            case 2: return ImVec4(0.996f, 0.953f, 0.910f, 1.0f);
+            case 3: return ImVec4(0.996f, 0.969f, 0.886f, 1.0f);
+            case 4: return ImVec4(0.910f, 0.965f, 0.922f, 1.0f);
+            case 5: return ImVec4(0.918f, 0.949f, 0.996f, 1.0f);
             default: return ImVec4(0.973f, 0.976f, 0.980f, 1.0f);
         }
     }
@@ -193,25 +211,19 @@ const char* obtenerTiempoObjetivo(int prioridad)
     }
 }
 
-// ==========================================
-// FUNCION PARA TITULOS EN NEGRITA
-
 void dibujarTitulo(const char* texto)
 {
     if (fuenteBold != nullptr)
         ImGui::PushFont(fuenteBold);
 
     if (temaClaro)
-        ImGui::TextColored(ImVec4(0.125f, 0.129f, 0.141f, 1.0f), "%s", texto); // #202124
+        ImGui::TextColored(ImVec4(0.125f, 0.129f, 0.141f, 1.0f), "%s", texto);
     else
-        ImGui::TextColored(ImVec4(0.910f, 0.918f, 0.929f, 1.0f), "%s", texto); // #E8EAED
+        ImGui::TextColored(ImVec4(0.910f, 0.918f, 0.929f, 1.0f), "%s", texto);
 
     if (fuenteBold != nullptr)
         ImGui::PopFont();
 }
-
-// ==========================================
-// CONFIGURACION DE ESTILO MATERIAL DESIGN 3 (COMPACTO, CERO SCROLL)
 
 void configurarEstilo()
 {
@@ -222,7 +234,7 @@ void configurarEstilo()
     style.FrameRounding     = 7.0f;
     style.PopupRounding     = 9.0f;
     style.ScrollbarRounding = 0.0f;
-    style.ScrollbarSize     = 0.0f; // Cero barras de scroll visibles
+    style.ScrollbarSize     = 0.0f;
     style.GrabRounding      = 7.0f;
 
     style.WindowPadding = ImVec2(14, 10);
@@ -235,18 +247,18 @@ void configurarEstilo()
 
     if (temaClaro)
     {
-        style.Colors[ImGuiCol_WindowBg]         = ImVec4(0.969f, 0.976f, 0.988f, 1.0f); // #F7F9FC Superficie Base
-        style.Colors[ImGuiCol_ChildBg]          = ImVec4(1.000f, 1.000f, 1.000f, 1.0f); // #FFFFFF Tarjetas Elevadas
+        style.Colors[ImGuiCol_WindowBg]         = ImVec4(0.969f, 0.976f, 0.988f, 1.0f);
+        style.Colors[ImGuiCol_ChildBg]          = ImVec4(1.000f, 1.000f, 1.000f, 1.0f);
         style.Colors[ImGuiCol_PopupBg]          = ImVec4(1.000f, 1.000f, 1.000f, 1.0f);
-        style.Colors[ImGuiCol_Border]           = ImVec4(0.855f, 0.867f, 0.890f, 1.0f); // #DADDE3 Borde Fino
-        style.Colors[ImGuiCol_Text]             = ImVec4(0.125f, 0.129f, 0.141f, 1.0f); // #202124 Texto Principal
-        style.Colors[ImGuiCol_TextDisabled]     = ImVec4(0.373f, 0.388f, 0.408f, 1.0f); // #5F6368 Texto Secundario
-        style.Colors[ImGuiCol_FrameBg]          = ImVec4(0.945f, 0.953f, 0.965f, 1.0f); // #F1F3F6 Campos de Entrada
-        style.Colors[ImGuiCol_FrameBgHovered]   = ImVec4(0.910f, 0.941f, 0.996f, 1.0f); // #E8F0FE Hover
+        style.Colors[ImGuiCol_Border]           = ImVec4(0.855f, 0.867f, 0.890f, 1.0f);
+        style.Colors[ImGuiCol_Text]             = ImVec4(0.125f, 0.129f, 0.141f, 1.0f);
+        style.Colors[ImGuiCol_TextDisabled]     = ImVec4(0.373f, 0.388f, 0.408f, 1.0f);
+        style.Colors[ImGuiCol_FrameBg]          = ImVec4(0.945f, 0.953f, 0.965f, 1.0f);
+        style.Colors[ImGuiCol_FrameBgHovered]   = ImVec4(0.910f, 0.941f, 0.996f, 1.0f);
         style.Colors[ImGuiCol_FrameBgActive]    = ImVec4(1.000f, 1.000f, 1.000f, 1.0f);
-        style.Colors[ImGuiCol_Button]           = ImVec4(0.102f, 0.451f, 0.910f, 1.0f); // #1A73E8 Boton Primario
-        style.Colors[ImGuiCol_ButtonHovered]    = ImVec4(0.082f, 0.365f, 0.753f, 1.0f); // #1557B0
-        style.Colors[ImGuiCol_ButtonActive]     = ImVec4(0.067f, 0.302f, 0.635f, 1.0f); // #174EA6
+        style.Colors[ImGuiCol_Button]           = ImVec4(0.102f, 0.451f, 0.910f, 1.0f);
+        style.Colors[ImGuiCol_ButtonHovered]    = ImVec4(0.082f, 0.365f, 0.753f, 1.0f);
+        style.Colors[ImGuiCol_ButtonActive]     = ImVec4(0.067f, 0.302f, 0.635f, 1.0f);
         style.Colors[ImGuiCol_Header]           = ImVec4(0.910f, 0.941f, 0.996f, 1.0f);
         style.Colors[ImGuiCol_HeaderHovered]    = ImVec4(0.824f, 0.890f, 0.988f, 1.0f);
         style.Colors[ImGuiCol_HeaderActive]     = ImVec4(0.682f, 0.796f, 0.980f, 1.0f);
@@ -258,12 +270,12 @@ void configurarEstilo()
     }
     else
     {
-        style.Colors[ImGuiCol_WindowBg]         = ImVec4(0.118f, 0.125f, 0.141f, 1.0f); // #1E2024
-        style.Colors[ImGuiCol_ChildBg]          = ImVec4(0.157f, 0.165f, 0.184f, 1.0f); // #282A2F
+        style.Colors[ImGuiCol_WindowBg]         = ImVec4(0.118f, 0.125f, 0.141f, 1.0f);
+        style.Colors[ImGuiCol_ChildBg]          = ImVec4(0.157f, 0.165f, 0.184f, 1.0f);
         style.Colors[ImGuiCol_PopupBg]          = ImVec4(0.157f, 0.165f, 0.184f, 1.0f);
-        style.Colors[ImGuiCol_Border]           = ImVec4(0.235f, 0.251f, 0.275f, 1.0f); // #3C4046
-        style.Colors[ImGuiCol_Text]             = ImVec4(0.910f, 0.918f, 0.929f, 1.0f); // #E8EAED
-        style.Colors[ImGuiCol_TextDisabled]     = ImVec4(0.604f, 0.627f, 0.651f, 1.0f); // #9AA0A6
+        style.Colors[ImGuiCol_Border]           = ImVec4(0.235f, 0.251f, 0.275f, 1.0f);
+        style.Colors[ImGuiCol_Text]             = ImVec4(0.910f, 0.918f, 0.929f, 1.0f);
+        style.Colors[ImGuiCol_TextDisabled]     = ImVec4(0.604f, 0.627f, 0.651f, 1.0f);
         style.Colors[ImGuiCol_FrameBg]          = ImVec4(0.196f, 0.208f, 0.227f, 1.0f);
         style.Colors[ImGuiCol_FrameBgHovered]   = ImVec4(0.235f, 0.251f, 0.282f, 1.0f);
         style.Colors[ImGuiCol_FrameBgActive]    = ImVec4(0.255f, 0.275f, 0.314f, 1.0f);
@@ -280,9 +292,6 @@ void configurarEstilo()
         style.Colors[ImGuiCol_TableRowBgAlt]    = ImVec4(0.180f, 0.188f, 0.208f, 1.0f);
     }
 }
-
-// ==========================================
-// COMPONENTES VECTORIALES ANIMADOS (ImDrawList)
 
 static void dibujarIconoClinicoAnimado(float pulso)
 {
@@ -379,9 +388,6 @@ static void dibujarConectorPunteroAnimado(float anchoConector, float altoTarjeta
     ImGui::Dummy(ImVec2(anchoConector, altoTarjeta));
 }
 
-// ==========================================
-// AGREGAR PACIENTE
-
 void agregarPaciente()
 {
     string nombreTexto = nombre;
@@ -411,18 +417,18 @@ void agregarPaciente()
         sintomasTexto
     );
 
-    AnimacionNodo anim;
+    AnimacionNodo& anim = obtenerAnimNodo(nuevoPaciente.getId());
     anim.progresoEntrada = 0.0f;
     anim.hoverLerp = 0.0f;
     anim.flashCambio = 1.0f;
-    g_animNodos[nuevoPaciente.id] = anim;
 
-    colaPacientes.encolar(
-        nuevoPaciente,
+    colaPacientes.encolar(nuevoPaciente, prioridad);
+    colaAlertasClinicas.encolar(
+        "Ingreso [#" + std::to_string(nuevoPaciente.getId()) + "] " + nuevoPaciente.getNombre() + " - " + nuevoPaciente.getSintomas(),
         prioridad
     );
 
-    mensaje = "Encolado #" + std::to_string(nuevoPaciente.id) + " (" + nuevoPaciente.nombre +
+    mensaje = "Encolado #" + std::to_string(nuevoPaciente.getId()) + " (" + nuevoPaciente.getNombre() +
               ") en turno #" + std::to_string(posEstimada) + ".";
     mensajeError = false;
     g_animBanner = 0.0f;
@@ -433,14 +439,11 @@ void agregarPaciente()
     prioridadCombo = 0;
 }
 
-// ==========================================
-// ATENDER PACIENTE
-
 void atenderPaciente()
 {
     if (colaPacientes.verificar_vacio())
     {
-        mensaje = "No hay pacientes en espera en la cola de prioridad.";
+        mensaje = "Caso limite: No se puede desencolar porque la cola esta vacia (frente = nullptr).";
         mensajeError = true;
         g_animBanner = 0.0f;
         return;
@@ -451,6 +454,9 @@ void atenderPaciente()
 
     if (colaPacientes.desencolarConPrioridad(pacienteAtendido, prioridadAtendida))
     {
+        string alertaDespachada;
+        colaAlertasClinicas.desencolar(alertaDespachada);
+
         ultimoPacienteAtendido = pacienteAtendido;
         prioridadUltimoAtendido = prioridadAtendida;
         hayPacienteEnAtencion = true;
@@ -458,19 +464,36 @@ void atenderPaciente()
         g_animConsultorio = 0.0f;
         g_animBanner = 0.0f;
 
-        mensaje = "En atencion: [#" + std::to_string(pacienteAtendido.id) + "] " +
-                  pacienteAtendido.nombre + " (" + obtenerNombreCortoPrioridad(prioridadAtendida) + ")";
+        mensaje = "En atencion: [#" + std::to_string(pacienteAtendido.getId()) + "] " +
+                  pacienteAtendido.getNombre() + " (" + obtenerNombreCortoPrioridad(prioridadAtendida) + ")";
         mensajeError = false;
     }
 }
 
-// ==========================================
-// CARGAR PACIENTES DEMO PARA DEFENSA ACADEMICA
+void cargarCasoUnElemento()
+{
+    colaPacientes.limpiar();
+    colaAlertasClinicas.limpiar();
+    limpiarAnimaciones();
+
+    Paciente unico("Mateo Alvarez", 49, "Insuficiencia respiratoria aguda (Caso limite: 1 nodo)");
+    AnimacionNodo& anim = obtenerAnimNodo(unico.getId());
+    anim.progresoEntrada = 0.0f;
+    anim.flashCambio = 1.0f;
+
+    colaPacientes.encolar(unico, 1);
+    colaAlertasClinicas.encolar("Caso limite 1 nodo: frente == fin y sig == nullptr", 1);
+
+    mensaje = "Caso limite (1 elemento): Observe que Frente y Fin apuntan al mismo nodo y sig -> NULL.";
+    mensajeError = false;
+    g_animBanner = 0.0f;
+}
 
 void cargarPacientesDemo()
 {
     colaPacientes.limpiar();
-    g_animNodos.clear();
+    colaAlertasClinicas.limpiar();
+    limpiarAnimaciones();
 
     struct DatosDemo { const char* n; int e; const char* s; int p; };
     const DatosDemo lote[6] = {
@@ -485,21 +508,22 @@ void cargarPacientesDemo()
     for (int i = 0; i < 6; ++i)
     {
         Paciente p(lote[i].n, lote[i].e, lote[i].s);
-        AnimacionNodo anim;
+        AnimacionNodo& anim = obtenerAnimNodo(p.getId());
         anim.progresoEntrada = -0.10f * (float)i;
         anim.hoverLerp = 0.0f;
         anim.flashCambio = 0.6f;
-        g_animNodos[p.id] = anim;
+
         colaPacientes.encolar(p, lote[i].p);
+        colaAlertasClinicas.encolar(
+            "Alerta [#" + std::to_string(p.getId()) + "] " + p.getNombre() + ": " + p.getSintomas(),
+            lote[i].p
+        );
     }
 
-    mensaje = "6 pacientes demo cargados (ordenados por prioridad + FIFO sin scroll).";
+    mensaje = "6 pacientes demo cargados en Cola<Paciente> y Cola<string> (ordenados por prioridad + FIFO).";
     mensajeError = false;
     g_animBanner = 0.0f;
 }
-
-// ==========================================
-// TARJETA DE PACIENTE AUTO-ADAPTABLE (CERO SCROLL)
 
 void dibujarTarjetaAdaptable(
     Paciente paciente,
@@ -513,7 +537,7 @@ void dibujarTarjetaAdaptable(
     float dt,
     float pulsoGlobal)
 {
-    AnimacionNodo& anim = g_animNodos[paciente.id];
+    AnimacionNodo& anim = obtenerAnimNodo(paciente.getId());
     anim.progresoEntrada += dt * 3.2f;
     if (anim.progresoEntrada > 1.0f) anim.progresoEntrada = 1.0f;
     if (anim.flashCambio > 0.0f)
@@ -543,7 +567,6 @@ void dibujarTarjetaAdaptable(
     float elevacionHover = anim.hoverLerp * 3.0f;
     ImGui::SetCursorPosY(cursorOrig.y + offsetVertical - elevacionHover);
 
-    // Sombra proyectada Material 3
     ImDrawList* parentDl = ImGui::GetWindowDrawList();
     ImVec2 cardScreenPos = ImGui::GetCursorScreenPos();
     float sombraAlpha = (temaClaro ? 0.09f : 0.28f) * tVisible + (anim.hoverLerp * 0.07f);
@@ -575,13 +598,11 @@ void dibujarTarjetaAdaptable(
     bool hovered = ImGui::IsWindowHovered(ImGuiHoveredFlags_ChildWindows);
     anim.hoverLerp = lerpf(anim.hoverLerp, hovered ? 1.0f : 0.0f, dt * 12.0f);
 
-    // Barra superior de acento en la tarjeta
     ImDrawList* dl = ImGui::GetWindowDrawList();
     ImVec2 pMin = ImGui::GetWindowPos();
     ImVec2 pMax = ImVec2(pMin.x + ImGui::GetWindowWidth(), pMin.y + 4.0f);
     dl->AddRectFilled(pMin, pMax, ImGui::ColorConvertFloat4ToU32(color), 10.0f);
 
-    // Cabecera de posicion del nodo
     ImVec4 colorBadgeFrente = temaClaro ? ACCENT_SUCCESS : ImVec4(0.506f, 0.788f, 0.584f, 1.0f);
     ImVec4 colorBadgeFin    = temaClaro ? ACCENT_PRIMARY : ImVec4(0.541f, 0.706f, 0.973f, 1.0f);
 
@@ -591,12 +612,14 @@ void dibujarTarjetaAdaptable(
         ImGui::SameLine();
     }
 
-    if (indice == 0)
+    if (indice == 0 && totalEnCola == 1)
+        ImGui::TextColored(colorBadgeFrente, "[FRENTE = FIN #1]");
+    else if (indice == 0)
         ImGui::TextColored(colorBadgeFrente, "[FRENTE #%d]", indice + 1);
     else if (indice == totalEnCola - 1)
         ImGui::TextColored(colorBadgeFin, "[FIN #%d]", indice + 1);
     else
-        ImGui::TextDisabled("[Nodo #%d]", indice + 1);
+        ImGui::TextDisabled("[Pos #%d]", indice + 1);
 
     if (fuenteBold != nullptr)
         ImGui::PushFont(fuenteBold);
@@ -612,11 +635,10 @@ void dibujarTarjetaAdaptable(
 
     ImGui::Separator();
 
-    ImGui::Text("#%d · %da · %s", paciente.id, paciente.edad, paciente.horaIngreso.c_str());
-    ImGui::TextWrapped("%s", paciente.nombre.c_str());
-    ImGui::TextDisabled("%s", paciente.sintomas.c_str());
+    ImGui::Text("#%d · %da · %s", paciente.getId(), paciente.getEdad(), paciente.getHoraIngreso().c_str());
+    ImGui::TextWrapped("%s", paciente.getNombre().c_str());
+    ImGui::TextDisabled("%s", paciente.getSintomas().c_str());
 
-    // Posicionar puntero y botones siempre anclados en la parte inferior de la tarjeta sin cortar
     float posYBotones = altoTarjeta - 44.0f;
     if (ImGui::GetCursorPosY() < posYBotones)
     {
@@ -654,18 +676,12 @@ void dibujarTarjetaAdaptable(
     ImGui::PopID();
 }
 
-// ==========================================
-// VISTA PREVIA Y BOX DE ATENCION (CERO SCROLL)
-
 void dibujarVistaPrevia(float dt, float pulsoGlobal)
 {
     ImGuiWindowFlags noScrollFlags = ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
     float anchoDisp = ImGui::GetContentRegionAvail().x;
     float mitadAncho = (anchoDisp - 10.0f) * 0.50f;
 
-    // ---------------------------------------------------------
-    // SUB-PANEL 1: VISTA PREVIA DE INGRESO Y POSICION ESTIMADA
-    // ---------------------------------------------------------
     ImGui::BeginChild("SubPanelPrevia", ImVec2(mitadAncho, 0), false, noScrollFlags);
 
     dibujarTitulo("VISTA PREVIA DE ADMISION");
@@ -723,9 +739,6 @@ void dibujarVistaPrevia(float dt, float pulsoGlobal)
 
     ImGui::SameLine();
 
-    // ---------------------------------------------------------
-    // SUB-PANEL 2: CONSULTORIO ACTIVO (ULTIMO PACIENTE ATENDIDO)
-    // ---------------------------------------------------------
     ImGui::BeginChild("SubPanelConsultorio", ImVec2(0, 0), false, noScrollFlags);
 
     dibujarTitulo("BOX MEDICO EN ATENCION");
@@ -765,9 +778,9 @@ void dibujarVistaPrevia(float dt, float pulsoGlobal)
             ImGui::PopFont();
 
         ImGui::Separator();
-        ImGui::Text("Ticket: #%d | Hora: %s | Edad: %d", ultimoPacienteAtendido.id, ultimoPacienteAtendido.horaIngreso.c_str(), ultimoPacienteAtendido.edad);
-        ImGui::TextWrapped("Paciente: %s", ultimoPacienteAtendido.nombre.c_str());
-        ImGui::TextWrapped("Cuadro: %s", ultimoPacienteAtendido.sintomas.c_str());
+        ImGui::Text("Ticket: #%d | Hora: %s | Edad: %d", ultimoPacienteAtendido.getId(), ultimoPacienteAtendido.getHoraIngreso().c_str(), ultimoPacienteAtendido.getEdad());
+        ImGui::TextWrapped("Paciente: %s", ultimoPacienteAtendido.getNombre().c_str());
+        ImGui::TextWrapped("Cuadro: %s", ultimoPacienteAtendido.getSintomas().c_str());
     }
 
     ImGui::Separator();
@@ -779,8 +792,8 @@ void dibujarVistaPrevia(float dt, float pulsoGlobal)
         ImGui::TextColored(
             obtenerColor(sigPrio),
             "Proximo en Frente: #%d %s (P%d)",
-            sigPaciente.id,
-            sigPaciente.nombre.c_str(),
+            sigPaciente.getId(),
+            sigPaciente.getNombre().c_str(),
             sigPrio
         );
     }
@@ -793,9 +806,6 @@ void dibujarVistaPrevia(float dt, float pulsoGlobal)
     ImGui::PopStyleVar();
     ImGui::EndChild();
 }
-
-// ==========================================
-// BARRA DISTRIBUCION ANIMADA POR PRIORIDAD (KPI BAR)
 
 static void dibujarBarraDistribucionPrioridades(float dt)
 {
@@ -836,9 +846,6 @@ static void dibujarBarraDistribucionPrioridades(float dt)
     ImGui::Dummy(ImVec2(anchoTotal, altoBarra + 2.0f));
 }
 
-// ==========================================
-// INTERFAZ PRINCIPAL (100% RESPONSIVA Y CERO SCROLL)
-
 void dibujarInterfaz()
 {
     ImGuiIO& io = ImGui::GetIO();
@@ -862,10 +869,6 @@ void dibujarInterfaz()
 
     ImGui::Begin("Sistema de Triaje", nullptr, flags);
 
-    // ======================================
-    // ENCABEZADO CLINICO Y BARRA DE METRICAS (KPIs)
-    // ======================================
-
     dibujarIconoClinicoAnimado(pulsoGlobal);
     ImGui::SameLine();
 
@@ -876,14 +879,14 @@ void dibujarInterfaz()
     ImGui::SameLine(0.0f, 8.0f);
     ImGui::TextColored(
         temaClaro ? ImVec4(0.125f, 0.129f, 0.141f, 1.0f) : ImVec4(0.910f, 0.918f, 0.929f, 1.0f),
-        "|  Sistema de Triaje y Priorizacion en Emergencias"
+        "|  Sistema de Triaje (Grupo 2 - Colas de Prioridad)"
     );
 
     if (fuenteBold != nullptr)
         ImGui::PopFont();
 
-    float anchoAccionesTop = 425.0f;
-    if (ImGui::GetWindowWidth() > 860.0f)
+    float anchoAccionesTop = 535.0f;
+    if (ImGui::GetWindowWidth() > 960.0f)
     {
         ImGui::SameLine(ImGui::GetWindowWidth() - anchoAccionesTop);
     }
@@ -891,7 +894,7 @@ void dibujarInterfaz()
     ImGui::PushStyleColor(ImGuiCol_Button, temaClaro ? ImVec4(0.910f, 0.941f, 0.996f, 1.0f) : ImVec4(0.235f, 0.251f, 0.263f, 1.0f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, temaClaro ? ImVec4(0.824f, 0.890f, 0.988f, 1.0f) : ImVec4(0.300f, 0.320f, 0.340f, 1.0f));
     ImGui::PushStyleColor(ImGuiCol_Text, temaClaro ? ACCENT_PRIMARY : ImVec4(0.910f, 0.918f, 0.929f, 1.0f));
-    if (ImGui::Button(temaClaro ? "Tema: Claro" : "Tema: Oscuro", ImVec2(118, 26)))
+    if (ImGui::Button(temaClaro ? "Tema: Claro" : "Tema: Oscuro", ImVec2(110, 26)))
     {
         temaClaro = !temaClaro;
         configurarEstilo();
@@ -899,8 +902,17 @@ void dibujarInterfaz()
     ImGui::PopStyleColor(3);
 
     ImGui::SameLine();
+    ImGui::PushStyleColor(ImGuiCol_Button, ACCENT_WARNING);
     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
-    if (ImGui::Button("Cargar Demo (6)", ImVec2(142, 26)))
+    if (ImGui::Button("Caso: 1 Nodo", ImVec2(112, 26)))
+    {
+        cargarCasoUnElemento();
+    }
+    ImGui::PopStyleColor(2);
+
+    ImGui::SameLine();
+    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+    if (ImGui::Button("Cargar Demo (6)", ImVec2(138, 26)))
     {
         cargarPacientesDemo();
     }
@@ -910,11 +922,12 @@ void dibujarInterfaz()
     ImGui::PushStyleColor(ImGuiCol_Button, ACCENT_DANGER);
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.75f, 0.15f, 0.12f, 1.0f));
     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
-    if (ImGui::Button("Vaciar Cola", ImVec2(120, 26)))
+    if (ImGui::Button("Caso: Vacia", ImVec2(112, 26)))
     {
         colaPacientes.limpiar();
-        g_animNodos.clear();
-        mensaje = "Cola de prioridad vaciada correctamente (memoria liberada).";
+        colaAlertasClinicas.limpiar();
+        limpiarAnimaciones();
+        mensaje = "Caso limite (Cola vacia): frente = nullptr, fin = nullptr, cantidad = 0.";
         mensajeError = false;
         g_animBanner = 0.0f;
     }
@@ -927,29 +940,23 @@ void dibujarInterfaz()
         ImGui::SameLine();
     }
     ImGui::TextDisabled(
-        "| En Espera: %d | Atendidos: %d | Saltos/Ops Punteros: %d",
+        "| En Espera: %d | Atendidos: %d | Ops Punteros: %d | Template Cola<string>: %d",
         colaPacientes.mostrar_tamanio(),
         totalPacientesAtendidos,
-        colaPacientes.obtenerTotalOperaciones()
+        colaPacientes.obtenerTotalOperaciones(),
+        colaAlertasClinicas.mostrar_tamanio()
     );
 
     dibujarBarraDistribucionPrioridades(dt);
 
-    // ======================================
-    // CALCULO PROPORCIONAL EXACTO DE PANELES (CERO SCROLL)
-    // ======================================
     ImGuiWindowFlags childNoScroll = ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
 
     float anchoDisponible = ImGui::GetContentRegionAvail().x;
     float altoDisponible  = ImGui::GetContentRegionAvail().y;
 
     float anchoFormulario = anchoDisponible * 0.44f;
-    float altoSuperior    = std::max(255.0f, altoDisponible * 0.45f);
-    float altoInferior    = std::max(180.0f, altoDisponible - altoSuperior - 8.0f);
-
-    // ======================================
-    // PANEL IZQUIERDO: FORMULARIO COMPACTO EN 2 COLUMNAS INTERNAS (CERO SCROLL)
-    // ======================================
+    float altoSuperior    = maxf(255.0f, altoDisponible * 0.45f);
+    float altoInferior    = maxf(180.0f, altoDisponible - altoSuperior - 8.0f);
 
     ImGui::BeginChild(
         "PanelFormulario",
@@ -958,9 +965,8 @@ void dibujarInterfaz()
         childNoScroll
     );
 
-    dibujarTitulo("REGISTRAR PACIENTE");
+    dibujarTitulo("REGISTRAR PACIENTE (INSERCION POR PRIORIDAD)");
 
-    // Fila 1: Nombre completo (70%) + Edad (30%) en la misma fila para ahorrar altura
     float anchoFilaForm = ImGui::GetContentRegionAvail().x;
     float anchoColNombre = (anchoFilaForm - 8.0f) * 0.72f;
     float anchoColEdad   = (anchoFilaForm - 8.0f) * 0.28f;
@@ -983,7 +989,6 @@ void dibujarInterfaz()
     }
     ImGui::EndGroup();
 
-    // Fila 2: Sintomas con altura dinamica adaptada al panel
     ImGui::Text("Sintomas / Motivo clinico");
     float altoSintomas = clampf(altoSuperior * 0.16f, 34.0f, 52.0f);
     ImGui::SetNextItemWidth(-1);
@@ -994,7 +999,6 @@ void dibujarInterfaz()
         ImVec2(-1, altoSintomas)
     );
 
-    // Fila 3: Nivel de prioridad (Combo + Chips Material 3)
     ImGui::Text("Nivel de prioridad (Escala Manchester)");
 
     const char* prioridades[] = {
@@ -1028,7 +1032,6 @@ void dibujarInterfaz()
         if (i < 4) ImGui::SameLine();
     }
 
-    // Fila 4: Boton Registrar + Estado en vivo
     if (fuenteBold != nullptr)
         ImGui::PushFont(fuenteBold);
 
@@ -1067,10 +1070,6 @@ void dibujarInterfaz()
 
     ImGui::SameLine();
 
-    // ======================================
-    // PANEL DERECHO: VISTA PREVIA Y BOX MEDICO (CERO SCROLL)
-    // ======================================
-
     ImGui::BeginChild(
         "PanelVistaPrevia",
         ImVec2(0, altoSuperior),
@@ -1082,10 +1081,6 @@ void dibujarInterfaz()
 
     ImGui::EndChild();
 
-    // ======================================
-    // PANEL INFERIOR: COLA DE PACIENTES AUTO-AJUSTABLE (CERO SCROLL)
-    // ======================================
-
     ImGui::BeginChild(
         "PanelCola",
         ImVec2(0, altoInferior),
@@ -1095,26 +1090,77 @@ void dibujarInterfaz()
 
     int cantidad = colaPacientes.mostrar_tamanio();
 
-    dibujarTitulo("COLA DE ATENCION PRIORIZADA");
-
+    dibujarTitulo("COLA DE PRIORIDAD");
     ImGui::SameLine();
-    ImGui::TextDisabled("| Total: %d pacientes", cantidad);
 
-    ImGui::SameLine();
-    if (ImGui::RadioButton("Tarjetas de Nodos (Frente -> Fin)", modoVistaCola == 0))
-    {
+    if (ImGui::RadioButton("Nodos (Frente->Fin)", modoVistaCola == 0))
         modoVistaCola = 0;
+    ImGui::SameLine();
+    if (ImGui::RadioButton("Punteros RAM (Nodo*)", modoVistaCola == 1))
+        modoVistaCola = 1;
+    ImGui::SameLine();
+    if (ImGui::RadioButton("Template Cola<string>", modoVistaCola == 2))
+        modoVistaCola = 2;
+
+    ImGui::SameLine();
+    ImGui::TextDisabled("| Pos:");
+    ImGui::SameLine();
+    ImGui::SetNextItemWidth(72.0f);
+    if (ImGui::InputInt("##PosUsuario", &posicionUsuario, 1, 1))
+    {
+        if (posicionUsuario < 1) posicionUsuario = 1;
     }
     ImGui::SameLine();
-    if (ImGui::RadioButton("Tabla de Memoria y Punteros (Nodo*)", modoVistaCola == 1))
+    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+    if (ImGui::SmallButton("Consultar Pos"))
     {
-        modoVistaCola = 1;
+        string errPos;
+        if (!validarPosicionCola(posicionUsuario, cantidad, errPos))
+        {
+            mensaje = errPos;
+            mensajeError = true;
+        }
+        else
+        {
+            Paciente pCons;
+            int prioCons = 0;
+            colaPacientes.obtenerElemento(posicionUsuario - 1, pCons, prioCons);
+            mensaje = "Pos #" + std::to_string(posicionUsuario) + ": [#" + std::to_string(pCons.getId()) + "] " +
+                      pCons.getNombre() + " (" + obtenerNombreCortoPrioridad(prioCons) + ")";
+            mensajeError = false;
+        }
+        g_animBanner = 0.0f;
     }
+    ImGui::PopStyleColor();
 
-    float anchoBotonAtender = 190.0f;
-    if (ImGui::GetWindowWidth() > 800.0f)
+    ImGui::SameLine();
+    ImGui::PushStyleColor(ImGuiCol_Button, ACCENT_DANGER);
+    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+    if (ImGui::SmallButton("Eliminar Pos"))
     {
-        ImGui::SameLine(ImGui::GetWindowWidth() - anchoBotonAtender - 18.0f);
+        string errPos;
+        if (!validarPosicionCola(posicionUsuario, cantidad, errPos))
+        {
+            mensaje = errPos;
+            mensajeError = true;
+        }
+        else
+        {
+            Paciente pElim;
+            colaPacientes.eliminarEnPosicion(posicionUsuario - 1, pElim);
+            string alertaElim;
+            colaAlertasClinicas.eliminarEnPosicion(posicionUsuario - 1, alertaElim);
+            mensaje = "Eliminado en posicion #" + std::to_string(posicionUsuario) + ": " + pElim.getNombre() + ".";
+            mensajeError = false;
+        }
+        g_animBanner = 0.0f;
+    }
+    ImGui::PopStyleColor(2);
+
+    float anchoBotonAtender = 178.0f;
+    if (ImGui::GetWindowWidth() > 960.0f)
+    {
+        ImGui::SameLine(ImGui::GetWindowWidth() - anchoBotonAtender - 16.0f);
     }
 
     if (fuenteBold != nullptr)
@@ -1125,7 +1171,7 @@ void dibujarInterfaz()
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.07f, 0.38f, 0.16f, 1.0f));
     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
 
-    if (ImGui::Button("ATENDER PACIENTE", ImVec2(anchoBotonAtender, 30)))
+    if (ImGui::Button("ATENDER PACIENTE", ImVec2(anchoBotonAtender, 28)))
     {
         atenderPaciente();
     }
@@ -1137,10 +1183,6 @@ void dibujarInterfaz()
 
     ImGui::Separator();
 
-    // ======================================
-    // MOSTRAR PACIENTES SIN SCROLL (DISTRIBUCION AUTOMATICA EN PANTALLA)
-    // ======================================
-
     int indiceSubirPrio = -1;
     int indiceEliminar = -1;
 
@@ -1151,12 +1193,11 @@ void dibujarInterfaz()
     {
         ImGui::Dummy(ImVec2(0, altoAreaCola * 0.28f));
         ImGui::TextDisabled(
-            "   Cola vacia (frente = nullptr, fin = nullptr). Registre un paciente o pulse 'Cargar Demo (6)'."
+            "   Caso Limite (Estructura Vacia): frente = nullptr, fin = nullptr, cantidad = 0. Pulse 'Caso: 1 Nodo' o 'Cargar Demo (6)'."
         );
     }
     else if (modoVistaCola == 0)
     {
-        // Calcular cuantas filas y columnas usar para que TODAS las tarjetas entren en pantalla con CERO scroll
         int filas = (cantidad > 6) ? 2 : 1;
         int colsPorFila = (filas == 1) ? cantidad : ((cantidad + 1) / 2);
         if (colsPorFila < 1) colsPorFila = 1;
@@ -1210,9 +1251,8 @@ void dibujarInterfaz()
 
         ImGui::PopStyleVar();
     }
-    else
+    else if (modoVistaCola == 1)
     {
-        // Vista de Tabla de Memoria y Punteros compacta (sin barra de scroll)
         ImGuiTableFlags tableFlags =
             ImGuiTableFlags_Borders |
             ImGuiTableFlags_RowBg |
@@ -1221,7 +1261,7 @@ void dibujarInterfaz()
         ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, ImVec2(6.0f, 3.0f));
         if (ImGui::BeginTable("TablaNodosMemoria", 9, tableFlags, ImVec2(0, altoAreaCola - 4.0f)))
         {
-            ImGui::TableSetupColumn("Posicion", ImGuiTableColumnFlags_WidthFixed, 90.0f);
+            ImGui::TableSetupColumn("Posicion", ImGuiTableColumnFlags_WidthFixed, 95.0f);
             ImGui::TableSetupColumn("Nodo* (Mem)", ImGuiTableColumnFlags_WidthFixed, 105.0f);
             ImGui::TableSetupColumn("sig* (Mem)", ImGuiTableColumnFlags_WidthFixed, 105.0f);
             ImGui::TableSetupColumn("Prioridad", ImGuiTableColumnFlags_WidthFixed, 155.0f);
@@ -1244,12 +1284,14 @@ void dibujarInterfaz()
                 ImGui::PushID(1000 + i);
 
                 ImGui::TableSetColumnIndex(0);
-                if (i == 0)
-                    ImGui::TextColored(ACCENT_SUCCESS, "[%d] FRENTE", i);
+                if (i == 0 && cantidad == 1)
+                    ImGui::TextColored(ACCENT_SUCCESS, "[1] FRENTE=FIN");
+                else if (i == 0)
+                    ImGui::TextColored(ACCENT_SUCCESS, "[1] FRENTE");
                 else if (i == cantidad - 1)
-                    ImGui::TextColored(ACCENT_PRIMARY, "[%d] FIN", i);
+                    ImGui::TextColored(ACCENT_PRIMARY, "[%d] FIN", i + 1);
                 else
-                    ImGui::Text("[%d] Nodo", i);
+                    ImGui::Text("[%d] Nodo", i + 1);
 
                 ImGui::TableSetColumnIndex(1);
                 ImGui::Text("%p", ptrNodo);
@@ -1264,16 +1306,16 @@ void dibujarInterfaz()
                 ImGui::TextColored(obtenerColor(prio), "%s", obtenerNombrePrioridad(prio).c_str());
 
                 ImGui::TableSetColumnIndex(4);
-                ImGui::Text("#%d (%s)", pac.id, pac.horaIngreso.c_str());
+                ImGui::Text("#%d (%s)", pac.getId(), pac.getHoraIngreso().c_str());
 
                 ImGui::TableSetColumnIndex(5);
-                ImGui::Text("%s", pac.nombre.c_str());
+                ImGui::Text("%s", pac.getNombre().c_str());
 
                 ImGui::TableSetColumnIndex(6);
-                ImGui::Text("%d", pac.edad);
+                ImGui::Text("%d", pac.getEdad());
 
                 ImGui::TableSetColumnIndex(7);
-                ImGui::Text("%s", pac.sintomas.c_str());
+                ImGui::Text("%s", pac.getSintomas().c_str());
 
                 ImGui::TableSetColumnIndex(8);
                 if (prio > 1)
@@ -1297,8 +1339,58 @@ void dibujarInterfaz()
         }
         ImGui::PopStyleVar();
     }
+    else
+    {
+        ImGui::TextDisabled(
+            "Demostracion de Reutilizacion de Plantilla (Template): la misma clase Cola<T> instanciada como Cola<std::string>:"
+        );
+        ImGuiTableFlags tableFlags =
+            ImGuiTableFlags_Borders |
+            ImGuiTableFlags_RowBg |
+            ImGuiTableFlags_SizingStretchProp;
 
-    // Procesar mutaciones diferidas (fuera del bucle de renderizado)
+        ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, ImVec2(6.0f, 4.0f));
+        if (ImGui::BeginTable("TablaColaString", 4, tableFlags, ImVec2(0, altoAreaCola - 24.0f)))
+        {
+            ImGui::TableSetupColumn("Referencia", ImGuiTableColumnFlags_WidthFixed, 110.0f);
+            ImGui::TableSetupColumn("Nodo<string>*", ImGuiTableColumnFlags_WidthFixed, 115.0f);
+            ImGui::TableSetupColumn("Prioridad", ImGuiTableColumnFlags_WidthFixed, 160.0f);
+            ImGui::TableSetupColumn("Dato almacenado (T = std::string)", ImGuiTableColumnFlags_WidthStretch);
+            ImGui::TableHeadersRow();
+
+            int cantAlertas = colaAlertasClinicas.mostrar_tamanio();
+            for (int i = 0; i < cantAlertas; ++i)
+            {
+                string textoAlerta;
+                int prioAlerta = 0;
+                colaAlertasClinicas.obtenerElemento(i, textoAlerta, prioAlerta);
+
+                ImGui::TableNextRow();
+                ImGui::TableSetColumnIndex(0);
+                if (i == 0 && cantAlertas == 1)
+                    ImGui::TextColored(ACCENT_SUCCESS, "[1] FRENTE=FIN");
+                else if (i == 0)
+                    ImGui::TextColored(ACCENT_SUCCESS, "[1] FRENTE");
+                else if (i == cantAlertas - 1)
+                    ImGui::TextColored(ACCENT_PRIMARY, "[%d] FIN", i + 1);
+                else
+                    ImGui::Text("[%d] Nodo", i + 1);
+
+                ImGui::TableSetColumnIndex(1);
+                ImGui::Text("%p", colaAlertasClinicas.obtenerDireccionNodo(i));
+
+                ImGui::TableSetColumnIndex(2);
+                ImGui::TextColored(obtenerColor(prioAlerta), "%s", obtenerNombrePrioridad(prioAlerta).c_str());
+
+                ImGui::TableSetColumnIndex(3);
+                ImGui::Text("%s", textoAlerta.c_str());
+            }
+
+            ImGui::EndTable();
+        }
+        ImGui::PopStyleVar();
+    }
+
     if (indiceSubirPrio >= 0)
     {
         Paciente pTemp;
@@ -1306,9 +1398,11 @@ void dibujarInterfaz()
         if (colaPacientes.obtenerElemento(indiceSubirPrio, pTemp, prioActual) && prioActual > 1)
         {
             colaPacientes.actualizarPrioridad(indiceSubirPrio, prioActual - 1);
-            g_animNodos[pTemp.id].progresoEntrada = 0.25f;
-            g_animNodos[pTemp.id].flashCambio = 1.0f;
-            mensaje = "Prioridad escalada para " + pTemp.nombre + " a Nivel " + std::to_string(prioActual - 1) + ".";
+            colaAlertasClinicas.actualizarPrioridad(indiceSubirPrio, prioActual - 1);
+            AnimacionNodo& anim = obtenerAnimNodo(pTemp.getId());
+            anim.progresoEntrada = 0.25f;
+            anim.flashCambio = 1.0f;
+            mensaje = "Prioridad escalada para " + pTemp.getNombre() + " a Nivel " + std::to_string(prioActual - 1) + ".";
             mensajeError = false;
             g_animBanner = 0.0f;
         }
@@ -1318,8 +1412,9 @@ void dibujarInterfaz()
         Paciente pEliminado;
         if (colaPacientes.eliminarEnPosicion(indiceEliminar, pEliminado))
         {
-            g_animNodos.erase(pEliminado.id);
-            mensaje = "Paciente retirado de la cola: " + pEliminado.nombre + ".";
+            string alertaElim;
+            colaAlertasClinicas.eliminarEnPosicion(indiceEliminar, alertaElim);
+            mensaje = "Paciente retirado de la cola: " + pEliminado.getNombre() + ".";
             mensajeError = false;
             g_animBanner = 0.0f;
         }
@@ -1329,9 +1424,6 @@ void dibujarInterfaz()
 
     ImGui::End();
 }
-
-// ==========================================
-// CARGA DE FUENTES CON RUTAS MULTIPLES
 
 static void cargarFuentesSistema(ImGuiIO& io)
 {
@@ -1379,9 +1471,6 @@ static void cargarFuentesSistema(ImGuiIO& io)
     }
 }
 
-// ==========================================
-// EJECUCION DE LA INTERFAZ
-
 #if USAR_BACKEND_WIN32
 
 static HGLRC g_hRC = nullptr;
@@ -1425,7 +1514,7 @@ void ejecutarInterfaz()
 
     HWND hwnd = ::CreateWindowW(
         wc.lpszClassName,
-        L"MediPriority - Sistema de Triaje y Priorizacion de Pacientes en Emergencias",
+        L"MediPriority - Sistema de Triaje y Priorizacion de Pacientes en Emergencias (Grupo 2)",
         WS_OVERLAPPEDWINDOW,
         60, 40, 1340, 820,
         nullptr, nullptr, wc.hInstance, nullptr
@@ -1457,7 +1546,7 @@ void ejecutarInterfaz()
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-    io.IniFilename = nullptr; // Evita que un imgui.ini viejo fije tamanios desfasados
+    io.IniFilename = nullptr;
 
     cargarFuentesSistema(io);
     configurarEstilo();
@@ -1479,7 +1568,6 @@ void ejecutarInterfaz()
         if (salir)
             break;
 
-        // Sincronizar en cada frame el area cliente real de la ventana (maximizar / redimensionar)
         RECT rcClient;
         if (::GetClientRect(hwnd, &rcClient))
         {
@@ -1535,7 +1623,7 @@ void ejecutarInterfaz()
     GLFWwindow* window = glfwCreateWindow(
         1340,
         820,
-        "MediPriority - Sistema de Triaje y Priorizacion de Pacientes en Emergencias",
+        "MediPriority - Sistema de Triaje y Priorizacion de Pacientes en Emergencias (Grupo 2)",
         nullptr,
         nullptr
     );

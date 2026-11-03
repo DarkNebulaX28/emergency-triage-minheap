@@ -1,247 +1,172 @@
-# MediPriority — Emergency Triage & Patient Prioritization System
+# MediPriority — Sistema de Triage y Priorización de Pacientes en Emergencias
 
-[![Release](https://img.shields.io/badge/release-v1.0.0-0052CC.svg)]()
+[![Grupo](https://img.shields.io/badge/Grupo%202-Colas%20de%20Prioridad-0052CC.svg)]()
 [![Standard](https://img.shields.io/badge/C%2B%2B-17-00599C.svg?logo=c%2B%2B&logoColor=white)]()
-[![GUI](https://img.shields.io/badge/GUI-Dear%20ImGui%20%2B%20OpenGL3-181717.svg)]()
-[![Build](https://img.shields.io/badge/build-Batch%20%7C%20CMake%20%7C%20Code%3A%3ABlocks-2EA44F.svg)]()
-[![STL Priority Queue](https://img.shields.io/badge/STL%20Priority%20Queue-None%20(100%25%20From%20Scratch)-critical.svg)]()
+[![IDE](https://img.shields.io/badge/IDE-Code%3A%3ABlocks%20%7C%20MinGW-2EA44F.svg)]()
+[![UI](https://img.shields.io/badge/UI-Dear%20ImGui%20%2B%20OpenGL3-1A73E8.svg)]()
+[![STL](https://img.shields.io/badge/STL%20Containers-None%20(100%25%20Manual)-critical.svg)]()
 
-**MediPriority** es un sistema clínico de clasificación (Triage) y despacho de pacientes para salas de emergencias hospitalarias desarrollado íntegramente en **C++17** con interfaz gráfica acelerada por hardware en **Dear ImGui + OpenGL3**.
-
-El motor de priorización implementa una **Cola de Prioridad Dinámica Enlazada (`Cola<T>`)** construida desde cero mediante gestión manual de punteros y memoria dinámica (`Nodo<T>`), prescindiendo por completo de contenedores especializados de la STL (`std::priority_queue`, `std::vector`, `std::list` o `<algorithm>`) para garantizar control algorítmico total, estabilidad **FIFO** en empates de urgencia e inspección directa de direcciones de memoria en tiempo real.
+> **Documento de Propuesta Técnica y Manual de Ejecución — Actividad en Equipo: Aplicación de Estructuras de Datos Dinámicas (Grupo 2: Colas de Prioridad)**
 
 ---
 
-## Tabla de Contenidos
+## Tabla de Contenidos (Según Rúbrica Oficial de Entregables)
 
-1. [Resumen Ejecutivo y Capacidades](#1-resumen-ejecutivo-y-capacidades)
-2. [Escala Clínica de Triage (Niveles 1 al 5)](#2-escala-clínica-de-triage-niveles-1-al-5)
-3. [Arquitectura del Sistema y Estructura del Repositorio](#3-arquitectura-del-sistema-y-estructura-del-repositorio)
-4. [Complejidad Algorítmica y Regla de Desempate FIFO](#4-complejidad-algorítmica-y-regla-de-desempate-fifo)
-5. [Guía de Inicialización, Compilación y Ejecución (Para Evaluación Docente)](#5-guía-de-inicialización-compilación-y-ejecución-para-evaluación-docente)
-6. [Verificación Automatizada (Suite de Pruebas Unitarias)](#6-verificación-automatizada-suite-de-pruebas-unitarias)
-7. [Grafo de Conocimiento del Proyecto](#7-grafo-de-conocimiento-del-proyecto)
-8. [ Flujo de Trabajo y Créditos del Equipo](#8-flujo-de-trabajo-y-créditos-del-equipo)
-
----
-
-## 1. Resumen Ejecutivo y Capacidades
-
-En una unidad de urgencias hospitalarias, el orden de atención no puede regirse por una cola simple *First-In, First-Out (FIFO)* pura, ya que un paciente con compromiso vital requiere intervención inmediata por encima de consultas ambulatorias registradas previamente.
-
-**MediPriority v1.0.0** resuelve este problema integrando:
-
-* **Motor de Cola de Prioridad Dinámica (`Cola<T>`):** Lista simplemente enlazada ordenada por nivel de prioridad (`1` a `5`) con inserción posicional estable (`strict <`), preservando el orden cronológico de llegada (**FIFO**) entre pacientes del mismo nivel de urgencia.
-* **Dashboard Clínico Animado (Material Design 3 + Dear ImGui / OpenGL3):**
-  * **Diseño Clínico Moderno y Animaciones Fluidas (`easeOutCubic`):** Icono clínico vectorial con pulso en vivo, superficies limpias de alto contraste (`#F7F9FC` / `#FFFFFF`), sombras proyectadas con elevación dinámica al pasar el cursor (*hover elevation*), entrada animada en cascada (*stagger*) de tarjetas de nodos, conectores de punteros `sig*` con partículas animadas en tiempo real y selector instantáneo **`Tema: Claro / Oscuro`**.
-  * **Indicadores KPI en Tiempo Real:** Contadores instantáneos en la cabecera para cada nivel de prioridad (`N1` a `N5`), pacientes en espera, pacientes atendidos y contador de operaciones de punteros.
-  * **Formulario de Admisión con Validación Clínica:** Verificación estricta de nombres alfabéticos, rango etario (`1 - 120` años), cuadro clínico obligatorio, chips rápidos de prioridad y previsualización en vivo de la posición exacta donde se insertará el paciente en la estructura enlazada.
-  * **Box Médico en Atención:** Panel de estado activo que muestra al último paciente despachado (`desencolarConPrioridad`), su ticket `#ID`, hora de ingreso y prioridad clínica, además del próximo paciente en `frente`.
-  * **Visualizador Gráfico de Nodos Enlazados:** Representación horizontal con scroll de tarjetas conectadas mediante punteros (`sig -->`) hasta `sig -> NULL`, con escalamiento dinámico de prioridad (`^ Subir Urgencia`) ante empeoramiento clínico y retiro individual (`Retirar`).
-  * **Inspector de Memoria Física (`Nodo*` y `sig*`):** Vista conmutable a tabla técnica que expone las direcciones hexadecimales reales en memoria RAM de cada nodo y su puntero `siguiente`.
-  * **Simulador Clínico Integrado:** Botón `Cargar Demo (6)` que inserta un lote realista de pacientes con prioridades mezcladas y empates para auditar el reordenamiento automático en un solo clic.
+1. [Nombre del Proyecto e Integrantes (Grupo 2)](#1-nombre-del-proyecto-e-integrantes-grupo-2)
+2. [Problema Real y Objetivo del Sistema](#2-problema-real-y-objetivo-del-sistema)
+3. [Justificación de la Estructura de Datos y Limitaciones](#3-justificación-de-la-estructura-de-datos-y-limitaciones)
+4. [Operaciones Requeridas y Complejidad Algorítmica](#4-operaciones-requeridas-y-complejidad-algorítmica)
+5. [Diseño del TDA, Encapsulamiento y Reutilización de Clases Genéricas (`templates`)](#5-diseño-del-tda-encapsulamiento-y-reutilización-de-clases-genéricas-templates)
+6. [Propuesta de UI y Justificación de la Librería Seleccionada](#6-propuesta-de-ui-y-justificación-de-la-librería-seleccionada)
+7. [Organización de Archivos del Ejercicio](#7-organización-de-archivos-del-ejercicio)
+8. [Instrucciones de Ejecución y Compilación (Code::Blocks, Script 1 Clic y Consola)](#8-instrucciones-de-ejecución-y-compilación-codeblocks-script-1-clic-y-consola)
+9. [Funcionalidad de la Demostración y Casos Límite para Defensa en Zoom](#9-funcionalidad-de-la-demostración-y-casos-límite-para-defensa-en-zoom)
 
 ---
 
-## 2. Escala Clínica de Triage (Niveles 1 al 5)
+## 1. Nombre del Proyecto e Integrantes (Grupo 2)
 
-El sistema adopta el estándar internacional de clasificación hospitalaria de 5 niveles (basado en el * Emergency Severity Index - ESI* y el *Sistema Español de Triaje*):
+* **Nombre del Proyecto:** **MediPriority** — Sistema Clínico de Triage y Priorización de Pacientes en Emergencias Hospitalarias.
+* **Tema Asignado:** **Grupo 2 — Colas de Prioridad Dinámicas**.
+* **Integrantes del Equipo:**
 
-| Prioridad | Categoría Clínica | Color | Tiempo Objetivo | Criterio de Ubicación en `Cola<Paciente>` |
-| :---: | :--- | :--- | :---: | :--- |
-| **1** | **Resucitación (Crítico)** | Rojo | Inmediato | Se inserta delante de prioridades `2, 3, 4, 5` (al final de otros `P1`). |
-| **2** | **Emergencia** | Naranja | < 10 - 15 min | Se inserta detrás de `P1` y delante de `P2` posteriores, `P3, P4, P5`. |
-| **3** | **Urgencia** | Amarillo | < 30 - 60 min | Se inserta detrás de `P1, P2` y delante de `P4, P5`. |
-| **4** | **Urgencia Menor** | Verde | < 120 min | Se inserta detrás de `P1, P2, P3` y delante de `P5`. |
-| **5** | **No Urgente** | Azul | < 240 min | Se ubica al final de la cola enlazada. |
-
----
-
-## 3. Arquitectura del Sistema y Estructura del Repositorio
-
-El código separa estrictamente la lógica de datos y validación respecto del mecanismo de entrega visual (GUI):
-
-```text
-emergency-triage-minheap/
-├── CMakeLists.txt                   # Configuración multiplataforma CMake (32/64 bits)
-├── ColasPrioridad.cbp               # Proyecto configurado para Code::Blocks IDE
-├── compilar_y_ejecutar.bat          # Script automatizado de compilación y arranque en 1 clic
-├── README.md                        # Documentación principal y guía de inicialización
-├── docs/
-│   ├── SPEC-triage-system.md        # Especificación técnica y modelo de datos
-│   ├── GUIA-DE-PRUEBAS-Y-DEFENSA.md # Guía paso a paso para sustentación y defensa académica
-│   └── decisions/
-│       └── ADR-001-custom-min-heap.md # Registro de decisión arquitectónica (Estructura enlazada)
-├── graphify-out/
-│   ├── GRAPH_REPORT.md              # Reporte estructural del grafo de conocimiento del proyecto
-│   ├── graph.html                   # Visualizador interactivo del grafo de arquitectura
-│   └── graph.json                   # Grafo serializado de nodos y relaciones
-├── fonts/
-│   ├── Inter-Regular.ttf            # Tipografía clínica principal
-│   └── Inter-Bold.ttf               # Tipografía para cabeceras e indicadores
-├── external/
-│   ├── imgui/                       # Motor gráfico Dear ImGui + Backends OpenGL3 / GLFW / Win32
-│   └── glfw-3.5.1.bin.WIN64/        # Cabeceras y binarios GLFW para entornos de 64 bits
-└── src/
-    ├── main.cpp                     # Punto de entrada dual (GUI por defecto + CLI --test / --help)
-    ├── Paciente.h                   # Entidad clínica Paciente (ID autoincremental, timestamp, datos)
-    ├── validacion.h                 # Reglas de validación de entrada y sanitización alfabética
-    ├── colaPrioridad.h              # Declaración de plantillas Nodo<T> y Cola<T>
-    ├── operaciones_colaPriori.h     # Implementación de algoritmos de encolado, desencolado y punteros
-    ├── interfaz.h                   # Contrato del módulo de presentación gráfica
-    └── interfaz.cpp                 # Implementación del Dashboard Clínico en Dear ImGui + OpenGL3
-```
+| Integrante | Rol y Módulos Desarrollados |
+| :--- | :--- |
+| **Anthony Aimacaña** (`@xavieraimacana`) | Coordinación arquitectónica, integración general, diseño de interfaz gráfica animada auto-adaptable (Cero Scroll), inspector de punteros RAM, reutilización de templates y documentación técnica. |
+| **Mateo Soto** (`@MateoS`) | Diseño e implementación manual desde cero del TDA genérico `Cola<T>` y su gestión de memoria dinámica (`colaPrioridad.h`, `operaciones_colaPriori.h`). |
+| **Alejandro Rivadeneira** | Modelado del TDA `Paciente`, reglas de validación clínica (`validacion.h`) y estructura base de interfaz gráfica (`interfaz.h`, `interfaz.cpp`). |
 
 ---
 
-## 4. Complejidad Algorítmica y Regla de Desempate FIFO
+## 2. Problema Real y Objetivo del Sistema
 
-La estructura `Cola<T>` definida en [`src/colaPrioridad.h`](src/colaPrioridad.h) e implementada en [`src/operaciones_colaPriori.h`](src/operaciones_colaPriori.h) utiliza nodos dinámicos enlazados:
+### 2.1. Problema Real (Sala de Emergencias Hospitalarias)
+En el área de urgencias de un hospital, los pacientes arriban de manera continua presentando cuadros clínicos de severidad heterogénea: desde paros cardiorrespiratorios o traumas craneoencefálicos severos (**Nivel 1 - Resucitación**) hasta esguinces leves o controles ambulatorios (**Nivel 5 - No Urgente**).
 
-```cpp
-template <typename T>
-struct Nodo {
-    T dato;
-    int prioridad;
-    Nodo<T>* siguiente;
-};
-```
+Si el hospital utilizara una cola común *First-In, First-Out (FIFO)* por orden de llegada, la vida de un paciente crítico correría peligro mientras espera detrás de pacientes con dolencias menores. Por el contrario, se requiere un mecanismo que ordene dinámicamente a los pacientes por su **nivel de gravedad clínica (Escala de Triaje Manchester 1 a 5)** y que, ante dos pacientes con la **misma prioridad**, respete estrictamente quién llegó primero (**desempate cronológico FIFO**).
 
-### Garantía de Desempate Cronológico (FIFO)
-Al invocar `encolar(const T& valor, int prioridad)`, el puntero auxiliar recorre la lista mediante la condición estricta:
-```cpp
-while (actual->siguiente != nullptr && actual->siguiente->prioridad <= prioridad) {
-    actual = actual->siguiente;
-}
-```
-El operador **`<=`** garantiza que el nuevo nodo avance hasta superar a todos los nodos previamente registrados con **mayor o igual urgencia**, insertándose inmediatamente después del último paciente de su misma prioridad y antes del primer paciente con prioridad numérica mayor (menor urgencia).
-
-| Operación | Método en `Cola<T>` | Complejidad Temporal | Complejidad Espacial |
-| :--- | :--- | :---: | :---: |
-| **Atender siguiente paciente** | `desencolar()` / `desencolarConPrioridad()` | $O(1)$ | $O(1)$ |
-| **Consultar próximo en turno** | `consultarFrente()` / `consultarFrenteConPrioridad()` | $O(1)$ | $O(1)$ |
-| **Registrar nuevo paciente** | `encolar(valor, prioridad)` | $O(N)$ | $O(1)$ |
-| **Escalar prioridad clínica** | `actualizarPrioridad(pos, nuevaPrioridad)` | $O(N)$ | $O(1)$ |
-| **Retirar paciente específico** | `eliminarEnPosicion(pos, salida)` | $O(N)$ | $O(1)$ |
-| **Inspección de punteros RAM** | `obtenerDireccionNodo(pos)` / `obtenerDireccionSiguiente(pos)` | $O(N)$ | $O(1)$ |
+### 2.2. Objetivo
+Diseñar e implementar desde cero en **C++17** un sistema de triaje hospitalario basado en una **Cola de Prioridad Dinámica Enlazada (`Cola<T>`)**, aplicando Tipos de Datos Abstractos (TDA) con atributos encapsulados (`private`), plantillas genéricas (`templates`), gestión manual de memoria dinámica (`new` / `delete`) sin utilizar contenedores de la STL (`<vector>`, `<algorithm>`, `<stack>`, `<queue>`), e integrando una interfaz gráfica interactiva (**Dear ImGui + OpenGL3**) que permita observar en tiempo real las operaciones, punteros (`frente`, `fin`, `sig*`) y casos límite de la estructura.
 
 ---
 
-## 5. Guía de Inicialización, Compilación y Ejecución (Para Evaluación Docente)
+## 3. Justificación de la Estructura de Datos y Limitaciones
 
-El repositorio es **100% autocontenido** (incluye fuentes tipográficas `Inter`, motor `Dear ImGui` y cabeceras/binarios necesarios en `external/`). Además, cuenta con **detección automática de arquitectura (`32 bits` y `64 bits`)**, por lo que compila sin configuraciones adicionales en cualquier PC con Windows y MinGW (`g++`).
+### 3.1. ¿Por qué una Cola de Prioridad Dinámica Enlazada es adecuada para este problema?
+1. **Atención Médica Inmediata en $O(1)$:** Al mantener la lista enlazada ordenada por prioridad en todo momento, el paciente más crítico siempre se ubica en el puntero `frente`. Cuando un médico queda libre en el consultorio (`desencolar`), la extracción toma **tiempo constante $O(1)$**.
+2. **Estabilidad FIFO Natural y Exacta:** Al insertar un nuevo nodo (`encolar`) avanzando mientras `prioridad >= actual->sig->prioridad`, el nuevo paciente se posiciona automáticamente detrás de todos los pacientes previamente registrados con igual o mayor urgencia, preservando el orden cronológico de llegada sin estructuras auxiliares.
+3. **Crecimiento Dinámico sin Límite Fijo:** A diferencia de un arreglo estático, la memoria se reserva nodo a nodo en el *heap* (`new Nodo(valor, prioridad)`), adaptándose a picos de demanda en emergencias sin desperdiciar memoria ni requerir redimensionamientos costosos.
+4. **Visibilidad Explícita de Enlaces:** Permite inspeccionar en vivo las referencias `frente`, `fin` y los punteros `sig` (`Nodo* -> sig* -> nullptr`).
 
-### Pasos para Clonar y Ejecutar desde la PC del Docente
+### 3.2. Limitaciones de la Estructura
+1. **Costo de Inserción Lineal $O(N)$:** Para mantener el orden de prioridad y la estabilidad FIFO, la operación `encolar` debe recorrer en el peor caso hasta $N$ nodos para ubicar el punto exacto de inserción. (En salas de emergencia reales donde $N$ oscila entre $10$ y $200$ pacientes activos, este recorrido toma menos de $1\ \mu\text{s}$, siendo imperceptible).
+2. **Acceso Posicional Secuencial $O(N)$:** A diferencia de estructuras indexadas en memoria contigua, consultar o eliminar una posición arbitraria `k` (`obtenerElemento`, `eliminarEnPosicion`) requiere recorrer los punteros `sig` desde `frente` en $O(k)$.
+
+---
+
+## 4. Operaciones Requeridas y Complejidad Algorítmica
+
+| Operación del TDA `Cola<T>` | Firma Pública en [`src/colaPrioridad.h`](src/colaPrioridad.h) | Descripción Funcional | Complejidad |
+| :--- | :--- | :--- | :---: |
+| **Inserción Priorizada** | `void encolar(const T& valor, int prioridad)` | Reserva un `Nodo` en memoria dinámica y lo enlaza según su prioridad (`1..5`) respetando FIFO. | $O(N)$ |
+| **Extracción / Atención** | `bool desencolar(T& atendido)` / `desencolarConPrioridad(...)` | Extrae el nodo apuntado por `frente`, actualiza `frente` (y `fin` si queda vacía) y ejecuta `delete`. | $O(1)$ |
+| **Consulta de Cabecera** | `bool consultarFrente(T& dato) const` | Obtiene el elemento de mayor urgencia en `frente` sin modificar la estructura. | $O(1)$ |
+| **Consulta / Recorrido** | `bool obtenerElemento(int posicion, T& dato, int& prio) const` | Recorre los enlaces `sig` desde `frente` hasta la posición solicitada por el usuario o la UI. | $O(N)$ |
+| **Eliminación por Posición** | `bool eliminarEnPosicion(int posicion, T& eliminado)` | Desenlaza y libera (`delete`) el nodo en la posición indicada por el usuario, reajustando `frente`/`fin`. | $O(N)$ |
+| **Re-categorización Clínica** | `bool actualizarPrioridad(int posicion, int nuevaPrioridad)` | Extrae un paciente que empeora clínicamente y lo reinserta en su nuevo nivel de urgencia. | $O(N)$ |
+| **Verificación de Vacío** | `bool verificar_vacio() const` | Comprueba si `frente == nullptr`. | $O(1)$ |
+| **Liberación Total** | `void limpiar()` / `~Cola()` | Recorre toda la estructura liberando cada nodo con `delete` para evitar fugas de memoria (*memory leaks*). | $O(N)$ |
+
+---
+
+## 5. Diseño del TDA, Encapsulamiento y Reutilización de Clases Genéricas (`templates`)
+
+### 5.1. Encapsulamiento Estricto (`private` / `public`)
+Tanto el contenedor genérico **`class Cola<T>`** ([`src/colaPrioridad.h`](src/colaPrioridad.h)) como la entidad clínica **`class Paciente`** ([`src/Paciente.h`](src/Paciente.h)) encapsulan todos sus atributos bajo acceso **`private:`**:
+
+* En **`class Cola<T>`**:
+  * **Atributos `private`:** `struct Nodo { T dato; Nodo* sig; int prioridad; }`, puntero `Nodo* frente`, puntero `Nodo* fin`, `int cantidad` e `int totalOperaciones`.
+  * **Operaciones `public`:** Constructor, destructor (con constructores de copia eliminados para evitar *shallow copy* y dobles liberaciones), inserción, extracción, consulta, recorrido e inspección de punteros.
+* En **`class Paciente`**:
+  * **Atributos `private`:** `int id`, `string nombre`, `int edad`, `string sintomas`, `string horaIngreso`.
+  * **Operaciones `public`:** Constructores sobrecargados, *getters* constantes (`getId()`, `getNombre()`, `getEdad()`, `getSintomas()`, `getHoraIngreso()`), *setters* y sobrecarga de `operator<<`.
+
+### 5.2. Demostración de Reutilización de la Plantilla (`Cola<T>`)
+Para demostrar que el TDA `Cola<T>` es verdaderamente genérico y reutilizable con distintos tipos de datos sin modificar una sola línea de su implementación:
+1. **Instancia 1 — `Cola<Paciente> colaPacientes`:** Administra objetos complejos de la clase `Paciente` en la sala de emergencias.
+2. **Instancia 2 — `Cola<std::string> colaAlertasClinicas`:** Administra cadenas de texto (`std::string`) como una bitácora priorizada de alertas médicas en tiempo real, visible directamente en la interfaz gráfica seleccionando la vista **`Template Cola<string>`** o en las pruebas unitarias (`--test`).
+
+---
+
+## 6. Propuesta de UI y Justificación de la Librería Seleccionada
+
+* **Librería UI Seleccionada:** **Dear ImGui v1.91 + OpenGL3** (con backend híbrido automático **Win32 WGL** para compiladores de 32 bits y **GLFW 3.5** para compiladores de 64 bits).
+* **Justificación Técnica:**
+  1. **Integración Nativa 100% C++:** Dear ImGui se compila directamente junto con el código fuente del proyecto sin requerir instaladores externos, entornos pesados (como Qt de varios gigabytes) ni DLLs adicionales en el sistema del evaluador.
+  2. **Renderizado en Tiempo Real para Estructuras de Datos:** Al ser una interfaz de modo inmediato (*Immediate Mode GUI*) acelerada por GPU, redibuja a 60 FPS el estado exacto de `Cola<Paciente>` en cada cuadro, permitiendo animar la inserción de nodos (`easeOutCubic`), el pulso de pacientes críticos (`Prioridad 1`) y el flujo de partículas sobre los punteros `sig*` entre nodos.
+  3. **Diseño Auto-Adaptable con Cero Scroll:** La ventana calcula dinámicamente las proporciones de cada panel y escala las tarjetas de nodos enlazados según el área cliente disponible (`GetClientRect` / `GetContentRegionAvail`), logrando visualizar toda la cola sin barras de desplazamiento.
+
+---
+
+## 7. Organización de Archivos del Ejercicio
+
+El proyecto cumple rigurosamente la estructura modular solicitada en la guía de la actividad:
+
+| Archivo | Rol Según Especificación de la Actividad |
+| :--- | :--- |
+| [`src/colaPrioridad.h`](src/colaPrioridad.h) y [`src/Paciente.h`](src/Paciente.h) | **Archivos `.h` con las clases, atributos `private` y funciones únicamente declaradas.** |
+| [`src/operaciones_colaPriori.h`](src/operaciones_colaPriori.h) | **Archivo `.h` con el cuerpo y desarrollo algorítmico de cada una de las funciones declaradas.** |
+| [`src/validacion.h`](src/validacion.h) | **Archivo `.h` con las validaciones del caso clínico, validación de posiciones y el menú de opciones disponibles.** |
+| [`src/main.cpp`](src/main.cpp) | **Archivo `.cpp` con un único método principal `main` que invoca a las funciones de los archivos cabecera.** |
+| [`src/interfaz.h`](src/interfaz.h) y [`src/interfaz.cpp`](src/interfaz.cpp) | Módulo de representación visual interactiva desacoplado de la lógica interna del TDA. |
+| [`ColasPrioridad.cbp`](ColasPrioridad.cbp) | Archivo de proyecto oficial para el IDE **Code::Blocks**. |
+| [`compilar_y_ejecutar.bat`](compilar_y_ejecutar.bat) | Script automatizado de compilación y ejecución en 1 clic para Windows. |
+
+---
+
+## 8. Instrucciones de Ejecución y Compilación (Code::Blocks, Script 1 Clic y Consola)
+
+El repositorio incluye dentro de `external/` y `fonts/` todo el código de **Dear ImGui** y las fuentes tipográficas necesarias. No requiere instalar paquetes externos.
+
+### Opción A — Ejecución Rápida en 1 Clic desde cualquier PC con Windows (Recomendado)
 
 ```powershell
 git clone https://github.com/xavieraimacana/emergency-triage-minheap.git
 cd emergency-triage-minheap
 .\compilar_y_ejecutar.bat
 ```
+*(El script detecta automáticamente el compilador `g++` en `PATH`, `C:\MinGW\bin`, `C:\msys64\mingw64\bin` o `C:\Program Files\CodeBlocks\MinGW\bin`, compila `MediPriority.exe`, ejecuta las pruebas unitarias y abre la interfaz gráfica).*
 
-### Opción A — Inicio Rápido en 1 Clic (`compilar_y_ejecutar.bat`)
+### Opción B — Desde el IDE Code::Blocks (Requisito Oficial)
 
-Haga doble clic sobre [`compilar_y_ejecutar.bat`](compilar_y_ejecutar.bat) en el Explorador de Windows o ejecútelo desde la terminal. El script detecta automáticamente el compilador `g++` instalado en la PC (ya sea en `PATH`, `C:\MinGW\bin`, `C:\msys64\mingw64\bin` o `C:\Program Files\CodeBlocks\MinGW\bin`), compila el sistema y abre la interfaz gráfica:
+1. Abrir **Code::Blocks**.
+2. Seleccionar **File -> Open...** y abrir el archivo [`ColasPrioridad.cbp`](ColasPrioridad.cbp) ubicado en la raíz del repositorio.
+3. Presionar **F9 (Build and Run)**.
 
-```powershell
-.\compilar_y_ejecutar.bat
-```
+### Opción C — Compilación Manual por Consola (`g++`)
 
-### Opción B — Compilación Manual por Línea de Comandos (`g++` MinGW)
-
-1. **Con MinGW de 32 bits (`C:\MinGW\bin\g++.exe`):**
-   ```powershell
-   g++ -std=c++17 -O2 -Isrc -Iexternal/imgui -Iexternal/imgui/backends src/main.cpp src/interfaz.cpp external/imgui/imgui.cpp external/imgui/imgui_draw.cpp external/imgui/imgui_tables.cpp external/imgui/imgui_widgets.cpp external/imgui/backends/imgui_impl_win32.cpp external/imgui/backends/imgui_impl_opengl3.cpp -o MediPriority.exe -lopengl32 -lgdi32 -luser32 -limm32
-   .\MediPriority.exe
-   ```
-
-2. **Con MinGW-w64 de 64 bits:**
-   ```powershell
-   g++ -std=c++17 -O2 -Isrc -Iexternal/imgui -Iexternal/imgui/backends -Iexternal/glfw-3.5.1.bin.WIN64/include src/main.cpp src/interfaz.cpp external/imgui/imgui.cpp external/imgui/imgui_draw.cpp external/imgui/imgui_tables.cpp external/imgui/imgui_widgets.cpp external/imgui/backends/imgui_impl_glfw.cpp external/imgui/backends/imgui_impl_opengl3.cpp external/glfw-3.5.1.bin.WIN64/lib-mingw-w64/libglfw3.a -o MediPriority.exe -lopengl32 -lgdi32 -luser32 -lshell32 -limm32
-   .\MediPriority.exe
-   ```
-
-### Opción C — Compilación con CMake
-
-```powershell
-cmake -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build --config Release
-.\build\MediPriority.exe
-```
-
-### Opción D — Apertura en Code::Blocks IDE
-
-1. Abrir el archivo [`ColasPrioridad.cbp`](ColasPrioridad.cbp) desde **Code::Blocks**.
-2. Presionar **F9 (Build and Run)**.
+* **En MinGW de 32 bits:**
+  ```powershell
+  g++ -std=c++17 -O2 -Isrc -Iexternal/imgui -Iexternal/imgui/backends src/main.cpp src/interfaz.cpp external/imgui/imgui.cpp external/imgui/imgui_draw.cpp external/imgui/imgui_tables.cpp external/imgui/imgui_widgets.cpp external/imgui/backends/imgui_impl_win32.cpp external/imgui/backends/imgui_impl_opengl3.cpp -o MediPriority.exe -lopengl32 -lgdi32 -luser32 -limm32
+  .\MediPriority.exe
+  ```
+* **En MinGW-w64 de 64 bits:**
+  ```powershell
+  g++ -std=c++17 -O2 -Isrc -Iexternal/imgui -Iexternal/imgui/backends -Iexternal/glfw-3.5.1.bin.WIN64/include src/main.cpp src/interfaz.cpp external/imgui/imgui.cpp external/imgui/imgui_draw.cpp external/imgui/imgui_tables.cpp external/imgui/imgui_widgets.cpp external/imgui/backends/imgui_impl_glfw.cpp external/imgui/backends/imgui_impl_opengl3.cpp external/glfw-3.5.1.bin.WIN64/lib-mingw-w64/libglfw3.a -o MediPriority.exe -lopengl32 -lgdi32 -luser32 -lshell32 -limm32
+  .\MediPriority.exe
+  ```
 
 ---
 
-## 6. Verificación Automatizada (Suite de Pruebas Unitarias)
+## 9. Funcionalidad de la Demostración y Casos Límite para Defensa en Zoom
 
-El ejecutable incorpora un modo de auditoría por consola que verifica la inserción por prioridad, el desempate FIFO, la actualización dinámica de prioridad y las reglas de validación clínica sin requerir intervención manual:
+Durante la defensa del proyecto, cualquier integrante puede demostrar todos los puntos de la sección 5 del PDF directamente desde la interfaz gráfica:
 
-```powershell
-.\MediPriority.exe --test
-```
-
-Salida esperada:
-```text
-===================================================================
-  SUITE DE PRUEBAS UNITARIAS - COLA DE PRIORIDAD Y TRIAGE CLINICO  
-===================================================================
-  [PASS] 1. Ordenamiento por prioridad + desempate FIFO
-  [PASS] 2. Reubicacion dinamica al subir urgencia clinica
-  [PASS] 3. Validacion clinica y sanitizacion de entradas
-===================================================================
-  RESULTADO FINAL: TODAS LAS PRUEBAS PASARON EXITOSAMENTE (100%)
-===================================================================
-```
-
----
-
-## 7. Grafo de Conocimiento del Proyecto
-
-La arquitectura completa fue auditada y mapeada en [`graphify-out/GRAPH_REPORT.md`](graphify-out/GRAPH_REPORT.md) y [`graphify-out/graph.html`](graphify-out/graph.html) (**120 nodos, 192 relaciones y 8 comunidades cohesivas**):
-
-```mermaid
-flowchart LR
-    subgraph CLI_GUI["Punto de Entrada (main.cpp)"]
-        MAIN["main()"]
-        TEST["ejecutarPruebasUnitarias()"]
-    end
-
-    subgraph PRESENTACION["Dashboard Clínico (interfaz.cpp)"]
-        UI["ejecutarInterfaz()"]
-        DEMO["cargarDatosDemostracion()"]
-    end
-
-    subgraph DOMINIO["Dominio Clínico (Paciente.h / validacion.h)"]
-        PAC["struct Paciente"]
-        VAL["validarPaciente()"]
-    end
-
-    subgraph CORE["Motor Enlazado (colaPrioridad.h / operaciones_colaPriori.h)"]
-        COLA["class Cola<Paciente>"]
-        NODO["struct Nodo<Paciente>"]
-    end
-
-    MAIN -->|Modo Gráfico| UI
-    MAIN -->|--test| TEST
-    UI --> DEMO
-    UI --> VAL
-    UI --> COLA
-    TEST --> COLA
-    TEST --> VAL
-    COLA --> NODO
-    NODO --> PAC
-```
-
----
-
-## 8. Flujo de Trabajo y Créditos del Equipo
-
-| Integrante | Rol y Módulos Desarrollados |
-| :--- | :--- |
-| **Anthony Aimacaña** (`@xavieraimacana`) | Arquitectura general, integración de subsistemas, Dashboard Clínico avanzado (KPIs, Box Médico, Inspector de Punteros RAM, Simulador Demo), compatibilidad dual Win32/GLFW, suite de pruebas unitarias y documentación técnica. |
-| **Mateo Soto** (`@MateoS`) | Diseño e implementación de la estructura dinámica `Nodo<T>` y `Cola<T>` (`colaPrioridad.h`, `operaciones_colaPriori.h`). |
-| **Alejandro Rivadeneira** | Modelado de la entidad `Paciente`, reglas de validación (`validacion.h`) y estructura base de interfaz gráfica (`interfaz.h`, `interfaz.cpp`). |
+1. **Casos Límite en 1 Clic (Barra Superior):**
+   * Botón **`Caso: Vacía`**: Vacía la cola (`frente = nullptr, fin = nullptr, cantidad = 0`). Si se presiona **`ATENDER PACIENTE`** o **`Eliminar Pos`**, el sistema intercepta la operación y muestra el mensaje de validación de estructura vacía sin colapsar.
+   * Botón **`Caso: 1 Nodo`**: Inserta un único paciente demostrando visualmente el caso límite donde **`[FRENTE = FIN #1]`** apuntan exactamente a la misma dirección de memoria y `sig -> NULL`.
+   * Botón **`Cargar Demo (6)`**: Inserta 6 pacientes con prioridades mezcladas (`1, 2, 3, 4`) y empates (`P1` y `P2`) demostrando el ordenamiento automático y el desempate **FIFO**.
+2. **Inserción, Eliminación y Consulta por Posición Ingresada por el Usuario:**
+   * En la barra de la cola inferior se incluye el campo **`Pos: [ 1 ]`** junto con los botones **`Consultar Pos`** y **`Eliminar Pos`**, además de los botones **`^ Urgencia`** y **`Retirar`** en cada tarjeta.
+3. **Visualización de Punteros (`frente`, `fin`, `sig*`) y Reutilización de Template:**
+   * Con los 3 botones de radio (`Nodos (Frente->Fin)`, `Punteros RAM (Nodo*)` y `Template Cola<string>`), se alterna en vivo entre el diagrama de tarjetas enlazadas, la tabla de direcciones hexadecimales reales en memoria RAM y la segunda instancia de la plantilla `Cola<std::string>`.

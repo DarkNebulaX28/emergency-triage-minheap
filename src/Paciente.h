@@ -8,56 +8,33 @@
 
 using namespace std;
 
-struct Paciente {
+class Paciente {
+private:
     int id;
     string nombre;
     int edad;
     string sintomas;
     string horaIngreso;
 
-    static int siguienteId() {
-        static int contadorId = 1;
-        return contadorId++;
-    }
+    static int siguienteId();
+    static string obtenerHoraActual();
 
-    static string obtenerHoraActual() {
-        std::time_t ahora = std::time(nullptr);
-        std::tm* tiempoLocal = std::localtime(&ahora);
-        if (tiempoLocal == nullptr) {
-            return "00:00:00";
-        }
-        char buffer[16];
-        std::snprintf(buffer, sizeof(buffer), "%02d:%02d:%02d",
-                      tiempoLocal->tm_hour,
-                      tiempoLocal->tm_min,
-                      tiempoLocal->tm_sec);
-        return string(buffer);
-    }
+public:
+    Paciente();
+    Paciente(string nom, int ed, string sint);
+    Paciente(int idManual, string nom, int ed, string sint, string hora);
 
-    Paciente()
-        : id(0), nombre(""), edad(0), sintomas(""), horaIngreso("--:--:--") {}
+    int getId() const;
+    string getNombre() const;
+    int getEdad() const;
+    string getSintomas() const;
+    string getHoraIngreso() const;
 
-    Paciente(string nom, int ed, string sint)
-        : id(siguienteId()),
-          nombre(nom),
-          edad(ed),
-          sintomas(sint),
-          horaIngreso(obtenerHoraActual()) {}
+    void setNombre(const string& nom);
+    void setEdad(int ed);
+    void setSintomas(const string& sint);
 
-    Paciente(int idManual, string nom, int ed, string sint, string hora)
-        : id(idManual),
-          nombre(nom),
-          edad(ed),
-          sintomas(sint),
-          horaIngreso(hora) {}
-
-    friend ostream& operator<<(ostream& os, const Paciente& p) {
-        os << "[#" << p.id << " | " << p.horaIngreso << "] "
-           << "Paciente: " << p.nombre
-           << " | Edad: " << p.edad
-           << " | Sintomas: " << p.sintomas;
-        return os;
-    }
+    friend ostream& operator<<(ostream& os, const Paciente& p);
 };
 
-#endif // PACIENTE_H
+#endif
